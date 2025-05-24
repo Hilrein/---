@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SaparTime - Билеттерді іздеу</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+</head>
+<body>
+  {% block content %}
+  <main>
+    <center>
+        <h2>Сіздің өтінішіңіз сәтті жіберілді. Жауап сіздің поштаңызға келеді.</h2>
+        <a href="/" class="btn">Негізгі бетке</a>
+    </center>
+  </main>
+  {% endblock content %}
+</body>
+</html>

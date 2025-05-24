@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Билет іздеу нәтижелері</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+    {% block content %}
+    <center>
+        <h1>Билет іздеу нәтижелері</h1>
+        <div class="train-list">
+            {% if trains %}
+                <ul>
+                    {% for train in trains %}
+                        <li>
+                            <h2>Поезд №{{ train.number }}</h2>
+                            <p>Бағыт: {{ train.route }}</p>
+                            <p>Вагон түрі: {{ train.service_level }}</p>
+                            <form action="{% url 'buy_ticket' train.tid %}" method="get">
+                                <button type="submit" class="custom-btn btn-3">
+                                    <span>Мәліметтер</span>
+                                </button>
+                            </form>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>Сұрауыңыз бойынша нәтижелер табылмады.</p>
+                <form method="POST" action="{% url 'index' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="custom-btn btn-3">
+                        <span>Басты бет</span>
+                    </button>
+                  </form> 
+            {% endif %}
+        </div>
+    </center>
+    {% endblock content %}
+</body>
+</html>

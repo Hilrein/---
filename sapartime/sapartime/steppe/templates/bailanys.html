@@ -1,0 +1,116 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Байланыс - SaparTime</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .header h1 {
+      font-size: 3rem;
+      margin: 0;
+      color: #007BFF; /* Синий цвет */
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 25px;
+      font-size: 1.2rem;
+    }
+
+    .contact-info p {
+      line-height: 1.6;
+      text-align: center;
+      max-width: 800px;
+    }
+
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 30px;
+    }
+
+    .social-icons a {
+      font-size: 40px;
+      color: #007BFF; /* Синий цвет */
+      text-decoration: none;
+    }
+
+    .contact-info .whatsapp {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #25D366; /* Цвет WhatsApp */
+    }
+
+    .footer {
+      background: #007BFF; /* Синий цвет */
+      color: white;
+      padding: 20px;
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .footer h2 {
+      margin: 0;
+      font-size: 2rem;
+    }
+
+    .footer p {
+      margin-top: 10px;
+      font-size: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="header">
+      <h1>Бізбен қалай байланысуға болады</h1>
+    </div>
+
+    <div class="contact-info">
+      <p>Бізбен келесі байланыс арналарында хабарласа аласыз:</p>
+
+      <div class="social-icons">
+        <a href="https://www.instagram.com/sapartime.qz?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://t.me/sapartime_kz" target="_blank"><i class="fab fa-telegram"></i></a>
+      </div>
+
+      <p class="whatsapp">Біздің WhatsApp нөміріміз: +7 7476772378</p>
+
+      <p>Бізде бот бар, оған сіз өз шағымдарыңызды немесе мәселелеріңізді жібере аласыз. Менеджеріміз хабарламаны алғаннан кейін дереу сізбен байланысады. Біздің ботқа жазып, мәселеңізді шешеміз!</p>
+    </div>
+
+    <div class="footer">
+      <h2>SaparTime</h2>
+      <p>Жоғарыда көрсетілген байланыс арналарымен бізбен хабарласыңыз.</p>
+      <a href="/" class="btn">Басты бетке</a>
+    </div>
+  </div>
+
+</body>
+</html>

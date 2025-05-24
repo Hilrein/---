@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Құжаттар - SaparTime</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #8ecae6, #219ebc);
+      color: #fff;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .container-main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 50px 20px;
+    }
+
+    h2 {
+      font-size: 42px;
+      font-weight: bold;
+      color: #fff;
+      text-align: center;
+      margin-bottom: 30px;
+      text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
+    }
+
+    .content-section {
+      background-color: rgba(255, 255, 255, 0.9);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .content-section p {
+      font-size: 18px;
+      line-height: 1.8;
+      color: #333;
+      text-align: justify;
+      margin: 20px 0;
+    }
+
+    .pdf-container {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      margin-top: 20px;
+    }
+
+    .pdf-viewer {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .pdf-viewer iframe {
+      width: 100%;
+      height: 1000px; /* Увеличенный размер PDF для лучшего просмотра */
+      border: none;
+    }
+
+    /* Адаптивность для разных экранов */
+    @media (min-width: 1200px) {
+      .pdf-viewer iframe {
+        height: 1200px; /* Еще больше для больших экранов */
+      }
+    }
+
+    @media (max-width: 768px) {
+      .pdf-viewer iframe {
+        height: 600px; /* Меньше для мобильных устройств */
+      }
+    }
+  </style>
+</head>
+<body>
+  {% block content %}
+  <main>
+    <div class="container-main">
+      <section class="content-section">
+        <h2>Құжаттар мен Заңдар</h2>
+        
+        <div class="pdf-container">
+          <h3>SaparTime қызметі туралы заңдар мен шарттар</h3>
+          <p>Бұл бөлімде біздің қызметтерімізге қатысты барлық заңдар мен ережелер туралы ақпарат ұсынылады. Заңдар мен шарттарды оқып, сіз біздің қызметтерімізді қалай пайдалану керектігін түсінесіз.</p>
+
+          <div class="pdf-viewer">
+            <iframe src="https://online.fliphtml5.com/remkg/ozrj/" frameborder="0"></iframe>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+  {% endblock content %}
+</body>
+</html>

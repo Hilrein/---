@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Билет мәліметтері</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    {% block content %}
+    <center>
+        <h1>Билет мәліметтері</h1>
+        <div class="ticket-details">
+            {% if train %}
+                <h2>Пойыз №{{ train.number }}</h2>
+                <p>Маршрут: {{ train.route }}</p>
+                <p>Станциялары: {{ stations }}</p>
+                <p>Қызмет көрсету деңгейі: {{ train.service_level }}</p>
+                <h3>Таңдалған вагон туралы мәлімет:</h3>
+                <p>Вагон №: {{ wagon.id }}</p>
+                <p>Вагон түрі: {{ wagon.wagon_type }}</p>
+                <p>Орындар саны: {{ wagon.seats }}</p>
+                <p>Билеттің құны: {{ wagon.ticket_price }}₸</p>
+                <h3>Брондау үшін қол жетімді орындар:</h3>
+                <form action="{% url 'payment_test'  %}" method="post">
+                    <select class="text-field__input" id="seat" name="seat">
+                        <option value="" selected disabled hidden>Орынды таңдаңыз</option>
+                        {% for seat in seats %}
+                            {% if forloop.counter not in tickets %}
+                                {% if seat|divisibleby:2 %}
+                                    <option value="{{ seat }}"> {{ seat }} (Жоғарғы) </option>
+                                {% else %}
+                                    <option value="{{ seat }}"> {{ seat }} (Төменгі) </option>
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                    <input type="hidden" name="train_id" value="{{ train.number }}">
+                    <input type="hidden" name="wagon_id" value="{{ wagon.id }}">
+                    <input type="hidden" name="wagon_type" value="{{ wagon.wagon_type }}">
+                    <input type="hidden" name="ticket_price" value="{{ wagon.ticket_price }}">
+                    {% csrf_token %}
+                    <br>
+                    <button type="submit" class="custom-btn btn-3">
+                        <span>Орынды таңдау</span>
+                    </button>
+                </form>
+                <br><br>
+            {% else %}
+                <p>Пойыз туралы мәліметтер жоқ.</p>
+            {% endif %}
+        </div>
+    </center>
+    {% endblock content %}
+</body>
+</html>

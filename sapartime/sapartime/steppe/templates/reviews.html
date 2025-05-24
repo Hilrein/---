@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Пікірлер</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        .reviews-list {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 60%;
+            margin: 0 auto;
+        }
+        .reviews-list ul {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+        }
+        .container-buttons button { 
+            display:inline-block;
+            zoom:1; 
+            vertical-align:top;
+        }
+        .container-buttons { 
+            text-align:justify;
+        }
+        .container-buttons:after {
+            display:inline-block; 
+            zoom:1;
+            width:100%;
+            content:"";
+        }
+        .wider-input {
+            width: 100%;
+            height: 200%;
+        }
+    </style>
+</head>
+<body>
+    {% block content %}
+        <center>
+            <div class="reviews-list">
+                {% if reviews %}
+                    {% for res in reviews %}
+                        <h2>Пікір №{{ res.rid }}</h2>
+                        <b>Бағалау: </b><i>{{ res.rating }} </i><br>
+                        <b>Пайдаланушы: </b><i>{{ res.author }}</i><br>
+                        <b>Пікір: </b><i>{{ res.text }}</i><br>
+                        {% if res.author == request.user.username %}
+                            <a href="{% url 'delete' res.rid %}">Пікірді жою</a>
+                        {% endif %}
+                        <br><br>
+                    {% endfor %}
+                    {% if request.user.is_authenticated %}
+                        <div style="max-width: 500px; margin-left: auto; margin-right: auto; padding: 15px;">
+                            <div class="container-buttons">
+                                <h3>Пікір қалдырыңыз.</h3>
+                                <form method="POST" action="{% url 'create' %}">
+                                    {% csrf_token %}
+                                    <label class="text-field__label" for="rating">Сіздің бағалауыңыз:</label>
+                                    <select class="text-field__input" id="rating" name="rating">
+                                        <option value="" selected disabled hidden>Таңдаңыз</option>
+                                            <option value="1"> 1 </option>
+                                            <option value="2"> 2 </option>
+                                            <option value="3"> 3 </option>
+                                            <option value="4"> 4 </option>
+                                            <option value="5"> 5 </option>
+                                    </select>
+                                    <br>
+                                    <div class="text-field">
+                                        <label class="text-field__label" for="review">Пікіріңізді енгізіңіз:</label>
+                                        <input class="text-field__input wider-input" type="text" name="review" id="review" required>
+                                        <div class="text-field__message"></div>                                    
+                                    </div>
+                                    <button type="submit" class="custom-btn btn-3">
+                                        <span>Жіберу</span>
+                                    </button>
+                                </form>
+                                <br>
+                                <form method="POST" action="{% url 'index' %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="custom-btn btn-3">
+                                        <span>Басты бет</span>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                        <br> <br> <br>
+                    {% endif %}
+                {% else %}
+                    <h2>Пікірлер табылған жоқ.</h2>
+                    <h3>Пікір қалдырыңыз.</h3>
+                    {% if request.user.is_authenticated %}
+                        <div style="max-width: 500px; margin-left: auto; margin-right: auto; padding: 15px;">
+                            <div class="container-buttons">
+                                <form method="POST" action="{% url 'create' %}">
+                                    {% csrf_token %}
+                                    <label class="text-field__label" for="rating">Сіздің бағалауыңыз:</label>
+                                    <select class="text-field__input" id="rating" name="rating">
+                                        <option value="" selected disabled hidden>Таңдаңыз</option>
+                                            <option value="1"> 1 </option>
+                                            <option value="2"> 2 </option>
+                                            <option value="3"> 3 </option>
+                                            <option value="4"> 4 </option>
+                                            <option value="5"> 5 </option>
+                                    </select>
+                                    <br>
+                                    <div class="text-field">
+                                        <label class="text-field__label" for="review">Пікіріңізді енгізіңіз:</label>
+                                        <input class="text-field__input wider-input" type="text" name="review" id="review" required>
+                                        <div class="text-field__message"></div>                                    
+                                    </div>
+                                    <button type="submit" class="custom-btn btn-3">
+                                        <span>Жіберу</span>
+                                    </button>
+                                </form>
+                                <br>
+                                <form method="POST" action="{% url 'index' %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="custom-btn btn-3">
+                                        <span>Басты бет</span>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                        <br> <br> <br>
+                    {% endif %}
+                    <br> <br> <br>
+                {% endif %}
+            </div>
+        </center>
+    {% endblock content %}
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Жеңілдік билеттер</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f9fc; 
+            color: #333;
+        }
+        header {
+            background-color: #2196F3; 
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 5px solid #1976D2;
+            font-size: 30px;
+            font-weight: 600;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            font-size: 26px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        p {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 30px;
+        }
+        .bonus-section {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        .bonus-card {
+            flex: 1 1 calc(25% - 30px);
+            background-color: #03A9F4; /* светлый голубой */
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 20px;
+        }
+        .bonus-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+        .bonus-card h2 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+        .bonus-card p {
+            font-size: 16px;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        footer {
+            background-color: #2196F3; /* ярко-синий цвет */
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+            font-size: 14px;
+        }
+
+        /* Мобильная адаптивность */
+        @media (max-width: 768px) {
+            .bonus-card {
+                flex: 1 1 calc(50% - 30px);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .bonus-card {
+                flex: 1 1 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    Жеңілдік билеттер жүйесі
+</header>
+
+<div class="container">
+    <h1>Бонус жүйесі</h1>
+    <p>1 бонус = 1 теңге. Бонустарды теміржол билеттері үшін ғана қолдануға болады. Толығырақ ақпарат төменде.</p>
+
+    <div class="bonus-section">
+        <div class="bonus-card">
+            <h2>Бонустарды алу</h2>
+            <p>Сатып алынған билеттер бойынша әрбір жол жүргеннен кейін 1% бонус есептеледі. Бонустар вагонның кез келген түріне беріледі.</p>
+        </div>
+        <div class="bonus-card">
+            <h2>Бонустарды пайдалану</h2>
+            <p>Бонустарды билеттің 99%-на дейін төлеу үшін пайдалана аласыз. Қалған соманы картамен төлеу керек - шамамен 100 теңге көлемінде. </p>
+        </div>
+        <div class="bonus-card">
+            <h2>Деңгейді сақтау</h2>
+            <p>Әр билет деңгейін 12 айға дейін сақтайды. Белгілі уақыт өткен соң билет жарамсыз болып қалады деңгей де сақталмайды. Бонустарды жоғалтпау үшін деңгейіңізді сақтап жүріңіз.</p>
+        </div>
+        <div class="bonus-card">
+            <h2>Бонустардың жарамдылығы</h2>
+            <p>Бонустардың мерзімі 12 айдан кейін аяқталады. Бонустардың түскенің немесе пайдаланылғаның жеке профильіңізден көре аласыз.</p>
+        </div>
+        <p><a href="/" class="btn">Басты бетке</a></p>
+    </div>
+</div>
+
+<footer>
+    <p>©️ 2024 Sapartime. Барлық құқықтар қорғалған.</p>
+</footer>
+
+</body>
+</html>

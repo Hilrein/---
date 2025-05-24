@@ -1,0 +1,253 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #333;
+        }
+
+        /* Хедер */
+        header {
+            background-color: #1E90FF; 
+            width: 100%;
+            padding: 15px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        header .small-logo {
+            width: 150px; 
+        }
+
+        .head nav ul {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .head nav ul li a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 18px;
+            transition: color 0.3s, text-decoration 0.3s;
+        }
+
+        .head nav ul li a:hover {
+            color: #ddd;
+            text-decoration: underline;
+        }
+
+        /* Стиль для бокового меню */
+        .side-menu {
+            position: fixed;
+            top: 0;
+            right: -300px; 
+            width: 300px;
+            height: 100%;
+            background-color: #ffffff;
+            border-left: 1px solid #ddd;
+            padding: 20px;
+            box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+            transition: right 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .side-menu.active {
+            right: 0; 
+        }
+
+        .side-menu ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .side-menu ul li {
+            margin-bottom: 10px; /* Расстояние между пунктами */
+        }
+
+        .side-menu ul li a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 15px;
+            background-color: #f9f9f9; /* Нежный цвет фона */
+            color: #333;
+            font-size: 16px;
+            border: 1px solid #ddd; /* Легкая граница */
+            border-radius: 6px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+
+        .side-menu ul li a:hover {
+            background-color: #1E90FF; /* Цвет при наведении */
+            color: #fff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Эффект тени */
+        }
+
+        #menu-trigger {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: #fff;
+            color: #1E90FF;
+            border-radius: 50%;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s, transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        #menu-trigger:hover {
+            background-color: #1E90FF;
+            color: #fff;
+            transform: scale(1.2);
+        }
+
+        .content {
+            margin-top: 50px;
+            padding: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 1200px;
+            border-radius: 8px;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .content:hover {
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.15); 
+        }
+
+        @media (max-width: 768px) {
+            .side-menu {
+                width: 250px;
+            }
+
+            .head nav ul {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            header .small-logo {
+                width: 120px;
+            }
+
+            .head nav ul li a {
+                font-size: 16px;
+            }
+
+            #menu-trigger {
+                font-size: 22px;
+            }
+            .side-menu {
+                left: -250px;
+                right: auto;
+            }
+
+            .side-menu.active {
+                left: 0; 
+            }
+        }
+
+        @media (max-width: 480px) {
+            header .small-logo {
+                width: 100px;
+            }
+
+            .head nav ul li a {
+                font-size: 14px;
+            }
+
+            .side-menu {
+                width: 200px; 
+            }
+        }
+    </style>
+    <title>SaparTime</title>
+</head>
+<body>
+    {% block header %}
+    <header>
+        <a href="/">
+            <img src="{% static 'img/img-of-logo.PNG' %}" alt="logo" class="small-logo"> <!-- Логотип -->
+        </a>
+        <div class="head">
+            <nav>
+                <ul>
+                    <li><a href="/">Басты бет</a></li>
+                    <li><a href="/about">Компания жайлы</a></li>
+                    <li><a href="/reviews">Пікірлер</a></li>
+                    {% if request.user.is_authenticated %}
+                        <li>
+                            <div id="menu-trigger"><span>&#9776;</span></div>
+                        </li>
+                    {% else %}
+                        <li><a href="/registration">Авторизация</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </header>
+    {% endblock header %}
+    <div class="side-menu" id="side-menu">
+        <ul>
+            <li><a href="/myprofile">Менің профильім</a></li>
+            <li><a href="/bonuses">Бонустар</a></li>
+            <li><a href="/promokod">Промокодтар</a></li>
+            <li><a href="/kuzhat">Құжаттар</a></li>
+            <li><a href="/bailanys">Байланыс</a></li>
+            <li><a href="/sayahat">Саяхатшылар әлемі</a></li>
+            <li><a href="{% url 'logout' %}">Шығу</a></li>
+        </ul>
+    </div>
+    <div class="content">
+        {% block content %}
+        {% endblock content %}
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const menuTrigger = document.getElementById("menu-trigger");
+            const sideMenu = document.getElementById("side-menu");
+
+            menuTrigger.addEventListener("click", function (e) {
+                e.preventDefault(); 
+                sideMenu.classList.toggle("active");
+            });
+
+            document.addEventListener("click", function (e) {
+                if (!sideMenu.contains(e.target) && e.target !== menuTrigger) {
+                    sideMenu.classList.remove("active");
+                }
+            });
+            sideMenu.querySelectorAll("a").forEach((link) => {
+                link.addEventListener("click", function () {
+                    sideMenu.classList.remove("active");
+                });
+            });
+        });
+    </script>
+</body>
+</html>
