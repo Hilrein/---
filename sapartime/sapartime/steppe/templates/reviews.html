@@ -1,138 +1,159 @@
 {% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="kk">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Пікірлер</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <style>
-        .reviews-list {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 60%;
-            margin: 0 auto;
-        }
-        .reviews-list ul {
-            list-style: none;
-            padding: 0;
-            text-align: left;
-        }
-        .container-buttons button { 
-            display:inline-block;
-            zoom:1; 
-            vertical-align:top;
-        }
-        .container-buttons { 
-            text-align:justify;
-        }
-        .container-buttons:after {
-            display:inline-block; 
-            zoom:1;
-            width:100%;
-            content:"";
-        }
-        .wider-input {
-            width: 100%;
-            height: 200%;
-        }
-    </style>
-</head>
-<body>
-    {% block content %}
-        <center>
-            <div class="reviews-list">
+
+{% block content %}
+<div class="reviews-page">
+    <div class="reviews-header">
+        <h1>Клиенттеріміздің пікірлері</h1>
+        <p>Біздің қызметтер туралы клиенттердің шынайы пікірлері</p>
+    </div>
+
+    <div class="reviews-stats">
+        <div class="stat-item">
+            <div class="stat-number">{{ reviews|length }}</div>
+            <div class="stat-label">Барлық пікірлер</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">
                 {% if reviews %}
-                    {% for res in reviews %}
-                        <h2>Пікір №{{ res.rid }}</h2>
-                        <b>Бағалау: </b><i>{{ res.rating }} </i><br>
-                        <b>Пайдаланушы: </b><i>{{ res.author }}</i><br>
-                        <b>Пікір: </b><i>{{ res.text }}</i><br>
-                        {% if res.author == request.user.username %}
-                            <a href="{% url 'delete' res.rid %}">Пікірді жою</a>
-                        {% endif %}
-                        <br><br>
-                    {% endfor %}
-                    {% if request.user.is_authenticated %}
-                        <div style="max-width: 500px; margin-left: auto; margin-right: auto; padding: 15px;">
-                            <div class="container-buttons">
-                                <h3>Пікір қалдырыңыз.</h3>
-                                <form method="POST" action="{% url 'create' %}">
-                                    {% csrf_token %}
-                                    <label class="text-field__label" for="rating">Сіздің бағалауыңыз:</label>
-                                    <select class="text-field__input" id="rating" name="rating">
-                                        <option value="" selected disabled hidden>Таңдаңыз</option>
-                                            <option value="1"> 1 </option>
-                                            <option value="2"> 2 </option>
-                                            <option value="3"> 3 </option>
-                                            <option value="4"> 4 </option>
-                                            <option value="5"> 5 </option>
-                                    </select>
-                                    <br>
-                                    <div class="text-field">
-                                        <label class="text-field__label" for="review">Пікіріңізді енгізіңіз:</label>
-                                        <input class="text-field__input wider-input" type="text" name="review" id="review" required>
-                                        <div class="text-field__message"></div>                                    
-                                    </div>
-                                    <button type="submit" class="custom-btn btn-3">
-                                        <span>Жіберу</span>
-                                    </button>
-                                </form>
-                                <br>
-                                <form method="POST" action="{% url 'index' %}">
-                                    {% csrf_token %}
-                                    <button type="submit" class="custom-btn btn-3">
-                                        <span>Басты бет</span>
-                                    </button>
-                                </form>
-                            </div>
-                        </div>
-                        <br> <br> <br>
-                    {% endif %}
+                    {% with avg_rating=reviews|length %}
+                        {% if avg_rating > 0 %}5.0{% else %}0{% endif %}
+                    {% endwith %}
                 {% else %}
-                    <h2>Пікірлер табылған жоқ.</h2>
-                    <h3>Пікір қалдырыңыз.</h3>
-                    {% if request.user.is_authenticated %}
-                        <div style="max-width: 500px; margin-left: auto; margin-right: auto; padding: 15px;">
-                            <div class="container-buttons">
-                                <form method="POST" action="{% url 'create' %}">
-                                    {% csrf_token %}
-                                    <label class="text-field__label" for="rating">Сіздің бағалауыңыз:</label>
-                                    <select class="text-field__input" id="rating" name="rating">
-                                        <option value="" selected disabled hidden>Таңдаңыз</option>
-                                            <option value="1"> 1 </option>
-                                            <option value="2"> 2 </option>
-                                            <option value="3"> 3 </option>
-                                            <option value="4"> 4 </option>
-                                            <option value="5"> 5 </option>
-                                    </select>
-                                    <br>
-                                    <div class="text-field">
-                                        <label class="text-field__label" for="review">Пікіріңізді енгізіңіз:</label>
-                                        <input class="text-field__input wider-input" type="text" name="review" id="review" required>
-                                        <div class="text-field__message"></div>                                    
-                                    </div>
-                                    <button type="submit" class="custom-btn btn-3">
-                                        <span>Жіберу</span>
-                                    </button>
-                                </form>
-                                <br>
-                                <form method="POST" action="{% url 'index' %}">
-                                    {% csrf_token %}
-                                    <button type="submit" class="custom-btn btn-3">
-                                        <span>Басты бет</span>
-                                    </button>
-                                </form>
-                            </div>
-                        </div>
-                        <br> <br> <br>
-                    {% endif %}
-                    <br> <br> <br>
+                    0
                 {% endif %}
             </div>
-        </center>
-    {% endblock content %}
-</body>
-</html>
+            <div class="stat-label">Орташа рейтинг</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">100%</div>
+            <div class="stat-label">Жағымды пікірлер</div>
+        </div>
+    </div>
+
+    <div class="reviews-container">
+        {% if reviews %}
+            <div class="reviews-list">
+                {% for res in reviews %}
+                <div class="review-card">
+                    <div class="review-badge">Тексерілген</div>
+                    <div class="review-header">
+                        <div class="review-author">
+                            <div class="author-avatar">
+                                <i class="user-icon"></i>
+                            </div>
+                            <div class="author-info">
+                                <div class="author-name">{{ res.author }}</div>
+                                <div class="review-date">{% now "d.m.Y" %}</div>
+                            </div>
+                        </div>
+                        <div class="review-rating">
+                            {% for i in "12345" %}
+                                {% if forloop.counter <= res.rating %}
+                                    <span class="star filled">★</span>
+                                {% else %}
+                                    <span class="star">☆</span>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="review-content">
+                        <p>{{ res.text }}</p>
+                    </div>
+                    <div class="review-footer">
+                        <div class="review-helpful">
+                            <button class="helpful-btn">
+                                <i class="helpful-icon"></i>
+                                <span>Пайдалы</span>
+                            </button>
+                        </div>
+                        {% if res.author == request.user.username %}
+                        <div class="review-actions">
+                            <a href="{% url 'delete' res.rid %}" class="delete-review">
+                                <i class="delete-icon"></i>
+                                <span>Жою</span>
+                            </a>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="no-reviews">
+                <div class="no-reviews-icon"></div>
+                <h2>Пікірлер табылған жоқ</h2>
+                <p>Сіз бірінші болып пікір қалдыра аласыз!</p>
+            </div>
+        {% endif %}
+
+        {% if request.user.is_authenticated %}
+        <div class="add-review-section">
+            <h2>Пікір қалдырыңыз</h2>
+            <form method="POST" action="{% url 'create' %}" class="review-form">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="rating">
+                        <i class="rating-icon"></i>
+                        Сіздің бағалауыңыз:
+                    </label>
+                    <div class="rating-select">
+                        <select id="rating" name="rating" required>
+                            <option value="" selected disabled hidden>Таңдаңыз</option>
+                            <option value="1">1 - Өте нашар</option>
+                            <option value="2">2 - Нашар</option>
+                            <option value="3">3 - Орташа</option>
+                            <option value="4">4 - Жақсы</option>
+                            <option value="5">5 - Өте жақсы</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="review">
+                        <i class="comment-icon"></i>
+                        Пікіріңізді енгізіңіз:
+                    </label>
+                    <textarea id="review" name="review" rows="5" placeholder="Сіздің пікіріңіз..." required></textarea>
+                </div>
+                <button type="submit" class="submit-review">
+                    <i class="send-icon"></i>
+                    <span>Жіберу</span>
+                </button>
+            </form>
+        </div>
+        {% else %}
+        <div class="login-to-review">
+            <div class="login-icon"></div>
+            <h3>Пікір қалдыру үшін авторизациядан өтіңіз</h3>
+            <p>Сіздің пікіріңіз біз үшін маңызды</p>
+            <a href="/registration" class="login-button">Тіркеу</a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Анимация появления карточек отзывов
+        const reviewCards = document.querySelectorAll('.review-card');
+        reviewCards.forEach((card, index) => {
+            setTimeout(() => {
+                card.classList.add('fade-in');
+            }, 100 * index);
+        });
+
+        // Обработчик для кнопки "Пайдалы"
+        const helpfulBtns = document.querySelectorAll('.helpful-btn');
+        helpfulBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                this.classList.toggle('active');
+                if (this.classList.contains('active')) {
+                    this.querySelector('span').textContent = 'Пайдалы · 1';
+                } else {
+                    this.querySelector('span').textContent = 'Пайдалы';
+                }
+            });
+        });
+    });
+</script>
+{% endblock content %}

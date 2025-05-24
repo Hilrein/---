@@ -1,131 +1,414 @@
-<!DOCTYPE html>
-<html lang="kk">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Жеңілдік билеттер</title>
-    <style>
-        body {
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f7f9fc; 
-            color: #333;
-        }
-        header {
-            background-color: #2196F3; 
-            color: white;
-            padding: 20px;
-            text-align: center;
-            border-bottom: 5px solid #1976D2;
-            font-size: 30px;
-            font-weight: 600;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 40px auto;
-            padding: 30px;
-            background-color: #ffffff;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-        h1 {
-            font-size: 26px;
-            margin-bottom: 20px;
-            color: #333;
-        }
-        p {
-            font-size: 18px;
-            color: #555;
-            margin-bottom: 30px;
-        }
-        .bonus-section {
-            display: flex;
-            gap: 30px;
-            flex-wrap: wrap;
-        }
-        .bonus-card {
-            flex: 1 1 calc(25% - 30px);
-            background-color: #03A9F4; /* светлый голубой */
-            color: white;
-            padding: 30px;
-            border-radius: 12px;
-            text-align: center;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            margin-bottom: 20px;
-        }
-        .bonus-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-        }
-        .bonus-card h2 {
-            font-size: 22px;
-            margin-bottom: 15px;
-            font-weight: 500;
-        }
-        .bonus-card p {
-            font-size: 16px;
-            margin-bottom: 20px;
-            line-height: 1.6;
-        }
-        footer {
-            background-color: #2196F3; /* ярко-синий цвет */
-            color: white;
-            text-align: center;
-            padding: 20px 0;
-            margin-top: 40px;
-            font-size: 14px;
-        }
+{% extends 'base.html' %}
+{% load static %}
 
-        /* Мобильная адаптивность */
-        @media (max-width: 768px) {
-            .bonus-card {
-                flex: 1 1 calc(50% - 30px);
-            }
-        }
-
-        @media (max-width: 480px) {
-            .bonus-card {
-                flex: 1 1 100%;
-            }
-        }
-    </style>
-</head>
-<body>
-
-<header>
-    Жеңілдік билеттер жүйесі
-</header>
-
-<div class="container">
-    <h1>Бонус жүйесі</h1>
-    <p>1 бонус = 1 теңге. Бонустарды теміржол билеттері үшін ғана қолдануға болады. Толығырақ ақпарат төменде.</p>
-
-    <div class="bonus-section">
-        <div class="bonus-card">
-            <h2>Бонустарды алу</h2>
-            <p>Сатып алынған билеттер бойынша әрбір жол жүргеннен кейін 1% бонус есептеледі. Бонустар вагонның кез келген түріне беріледі.</p>
+{% block content %}
+<div class="bonuses-container">
+    <h1 class="bonuses-title">Бонустар</h1>
+    
+    <div class="bonuses-info">
+        <p>SaparTime қолданушылары үшін арнайы бонустар мен ұсыныстар. Жиі саяхаттаңыз және артықшылықтар алыңыз!</p>
+    </div>
+    
+    <div class="bonuses-balance">
+        <div class="balance-card">
+            <div class="balance-header">
+                <h2>Сіздің бонустарыңыз</h2>
+            </div>
+            <div class="balance-amount">
+                <span class="amount">{{ user.balance|default:"0" }}</span>
+                <span class="currency">бонус</span>
+            </div>
+            <div class="balance-info">
+                <p>1 бонус = 1 теңге жеңілдік</p>
+            </div>
         </div>
-        <div class="bonus-card">
-            <h2>Бонустарды пайдалану</h2>
-            <p>Бонустарды билеттің 99%-на дейін төлеу үшін пайдалана аласыз. Қалған соманы картамен төлеу керек - шамамен 100 теңге көлемінде. </p>
+    </div>
+    
+    <div class="bonuses-program">
+        <h2>Бонустық бағдарлама</h2>
+        
+        <div class="program-cards">
+            <div class="program-card">
+                <div class="program-icon">
+                    <i class="fa-solid fa-ticket"></i>
+                </div>
+                <div class="program-info">
+                    <h3>Билет сатып алғаны үшін</h3>
+                    <p>Әрбір сатып алынған билет үшін соманың 5% бонус ретінде аласыз.</p>
+                </div>
+            </div>
+            
+            <div class="program-card">
+                <div class="program-icon">
+                    <i class="fa-solid fa-user-plus"></i>
+                </div>
+                <div class="program-info">
+                    <h3>Достарды шақырғаны үшін</h3>
+                    <p>Әр шақырылған дос үшін 500 бонус аласыз.</p>
+                </div>
+            </div>
+            
+            <div class="program-card">
+                <div class="program-icon">
+                    <i class="fa-solid fa-comment"></i>
+                </div>
+                <div class="program-info">
+                    <h3>Пікір қалдырғаны үшін</h3>
+                    <p>Саяхат туралы пікір қалдырсаңыз, 200 бонус аласыз.</p>
+                </div>
+            </div>
         </div>
-        <div class="bonus-card">
-            <h2>Деңгейді сақтау</h2>
-            <p>Әр билет деңгейін 12 айға дейін сақтайды. Белгілі уақыт өткен соң билет жарамсыз болып қалады деңгей де сақталмайды. Бонустарды жоғалтпау үшін деңгейіңізді сақтап жүріңіз.</p>
+    </div>
+    
+    <div class="how-to-use">
+        <h2>Бонустарды қалай пайдалануға болады?</h2>
+        
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h3>Билетті таңдаңыз</h3>
+                    <p>Өзіңізге қажетті бағытты және күнді таңдаңыз</p>
+                </div>
+            </div>
+            
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h3>Төлем жасау бетінде</h3>
+                    <p>"Бонустарды пайдалану" опциясын таңдаңыз</p>
+                </div>
+            </div>
+            
+            <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h3>Қанша бонус жұмсайтыныңызды көрсетіңіз</h3>
+                    <p>Толық немесе ішінара бонуспен төлеуге болады</p>
+                </div>
+            </div>
+            
+            <div class="step">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <h3>Жеңілдікпен билетіңізді алыңыз</h3>
+                    <p>Бонустарыңыз автоматты түрде есептеледі</p>
+                </div>
+            </div>
         </div>
-        <div class="bonus-card">
-            <h2>Бонустардың жарамдылығы</h2>
-            <p>Бонустардың мерзімі 12 айдан кейін аяқталады. Бонустардың түскенің немесе пайдаланылғаның жеке профильіңізден көре аласыз.</p>
+    </div>
+    
+    <div class="invite-friends">
+        <h2>Достарыңызды шақырыңыз</h2>
+        
+        <div class="invite-card">
+            <div class="invite-content">
+                <p>Жеке жіберу сілтемесін алыңыз және достарыңызбен бөлісіңіз. Олар тіркелгенде және алғашқы билетін сатып алғанда, сіз бонустар аласыз!</p>
+                
+                <div class="invite-link">
+                    <input type="text" value="https://sapartime.kz/ref/{{ user.referral_code|default:'12345' }}" readonly>
+                    <button class="copy-btn">Көшіру</button>
+                </div>
+                
+                <div class="social-share">
+                    <i class="fa-brands fa-whatsapp"></i>
+                    <i class="fa-brands fa-telegram"></i>
+                    <i class="fa fa-envelope"></i>
+                </div>
+            </div>
         </div>
-        <p><a href="/" class="btn">Басты бетке</a></p>
     </div>
 </div>
 
-<footer>
-    <p>©️ 2024 Sapartime. Барлық құқықтар қорғалған.</p>
-</footer>
+<style>
+    .fa-brands {
+        font-size: 35px;
+    }
 
-</body>
-</html>
+    .fa-brands.fa-whatsapp {
+        color: #25D366;
+    }
+
+    .fa-brands.fa-telegram {
+        color: #0088cc;
+    }
+
+    .fa-envelope {
+        font-size: 35px;
+        color: #333;
+    }
+
+    .fa-solid {
+        font-size: 35px;
+        color: #007bff;
+    }
+
+    .bonuses-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 40px 20px;
+    }
+    
+    .bonuses-title {
+        text-align: center;
+        color: #007bff;
+        font-size: 36px;
+        margin-bottom: 20px;
+    }
+    
+    .bonuses-info {
+        text-align: center;
+        max-width: 800px;
+        margin: 0 auto 40px;
+        font-size: 18px;
+        color: #555;
+    }
+    
+    .bonuses-balance {
+        margin-bottom: 50px;
+    }
+    
+    .balance-card {
+        background: linear-gradient(135deg, #007bff, #0056b3);
+        border-radius: 15px;
+        padding: 30px;
+        color: white;
+        text-align: center;
+        box-shadow: 0 10px 20px rgba(0, 123, 255, 0.2);
+        max-width: 500px;
+        margin: 0 auto;
+    }
+    
+    .balance-header h2 {
+        color: #fff;
+        margin-top: 0;
+        font-size: 24px;
+        font-weight: 500;
+    }
+    
+    .balance-amount {
+        margin: 20px 0;
+    }
+    
+    .amount {
+        font-size: 48px;
+        font-weight: 700;
+    }
+    
+    .currency {
+        font-size: 24px;
+        margin-left: 5px;
+    }
+    
+    .balance-info p {
+        margin: 0;
+        font-size: 16px;
+        opacity: 0.9;
+    }
+    
+    .bonuses-program {
+        margin-bottom: 50px;
+    }
+    
+    .bonuses-program h2, .how-to-use h2, .invite-friends h2 {
+        text-align: center;
+        color: #333;
+        font-size: 28px;
+        margin-bottom: 30px;
+    }
+    
+    .program-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 30px;
+    }
+    
+    .program-card {
+        background: #fff;
+        border-radius: 10px;
+        padding: 25px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        display: flex;
+        align-items: center;
+    }
+    
+    .program-icon {
+        margin-right: 20px;
+    }
+    
+    .program-icon img {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .program-info h3 {
+        margin-top: 0;
+        color: #007bff;
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+    
+    .program-info p {
+        margin: 0;
+        color: #666;
+    }
+    
+    .how-to-use {
+        margin-bottom: 50px;
+    }
+    
+    .steps {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+    
+    .step {
+        display: flex;
+        margin-bottom: 25px;
+        align-items: flex-start;
+    }
+    
+    .step-number {
+        width: 40px;
+        height: 40px;
+        background: #007bff;
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 20px;
+        margin-right: 20px;
+        flex-shrink: 0;
+    }
+    
+    .step-content h3 {
+        margin-top: 0;
+        color: #333;
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+    
+    .step-content p {
+        margin: 0;
+        color: #666;
+    }
+    
+    .invite-card {
+        background: #f8f9fa;
+        border-radius: 10px;
+        padding: 30px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        max-width: 800px;
+        margin: 0 auto;
+    }
+    
+    .invite-content {
+        text-align: center;
+    }
+    
+    .invite-content p {
+        margin-bottom: 25px;
+        color: #555;
+        font-size: 16px;
+    }
+    
+    .invite-link {
+        display: flex;
+        max-width: 500px;
+        margin: 0 auto 25px;
+    }
+    
+    .invite-link input {
+        flex: 1;
+        padding: 12px 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px 0 0 5px;
+        font-size: 14px;
+    }
+    
+    .copy-btn {
+        background: #007bff;
+        color: white;
+        border: none;
+        padding: 0 20px;
+        border-radius: 0 5px 5px 0;
+        cursor: pointer;
+        font-weight: 500;
+    }
+    
+    .social-share {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+    }
+    
+    .social-btn {
+        padding: 10px 20px;
+        border-radius: 5px;
+        color: white;
+        text-decoration: none;
+        font-weight: 500;
+    }
+    
+    .whatsapp {
+        background: #25D366;
+    }
+    
+    .telegram {
+        background: #0088cc;
+    }
+    
+    .email {
+        background: #dd4b39;
+    }
+    
+    @media (max-width: 768px) {
+        .program-cards {
+            grid-template-columns: 1fr;
+        }
+        
+        .invite-link {
+            flex-direction: column;
+        }
+        
+        .invite-link input {
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        
+        .copy-btn {
+            border-radius: 5px;
+            padding: 10px;
+        }
+        
+        .social-share {
+            flex-direction: column;
+        }
+        
+        .social-btn {
+            margin-bottom: 10px;
+        }
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const copyBtn = document.querySelector('.copy-btn');
+        const inviteLink = document.querySelector('.invite-link input');
+        
+        if (copyBtn && inviteLink) {
+            copyBtn.addEventListener('click', function() {
+                inviteLink.select();
+                document.execCommand('copy');
+                copyBtn.textContent = 'Көшірілді!';
+                
+                setTimeout(function() {
+                    copyBtn.textContent = 'Көшіру';
+                }, 2000);
+            });
+        }
+    });
+</script>
+{% endblock content %}

@@ -1,236 +1,288 @@
 {% extends 'base.html' %}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="kk">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SaparTime - Билеттерді іздеу</title>
-  <link rel="stylesheet" href="{% static 'css/style.css' %}" />
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f4f4f9;
-      color: #333;
-      transition: background-color 0.3s, color 0.3s;
-    }
-
-    .dark-mode {
-      background-color: #121212;
-      color: #e0e0e0;
-    }
-
-    /* Toggle button container */
-    .toggle-container {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      z-index: 1000;
-    }
-
-    /* The slider itself */
-    .switch {
-      position: relative;
-      display: inline-block;
-      width: 60px;
-      height: 34px;
-    }
-
-    /* Hide the default checkbox */
-    .switch input {
-      opacity: 0;
-      width: 0;
-      height: 0;
-    }
-
-    /* The slider track */
-    .slider {
-      position: absolute;
-      cursor: pointer;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-color: #ccc;
-      transition: .4s;
-      border-radius: 34px;
-    }
-
-    /* The circle inside the slider */
-    .slider:before {
-      position: absolute;
-      content: "";
-      height: 26px;
-      width: 26px;
-      border-radius: 50%;
-      left: 4px;
-      bottom: 4px;
-      background-color: white;
-      transition: .4s;
-    }
-
-    /* Change slider color when checked */
-    input:checked + .slider {
-      background-color: #3498db;
-    }
-
-    /* Move the circle when checked */
-    input:checked + .slider:before {
-      transform: translateX(26px);
-    }
-
-    .popular-routes {
-      margin-top: 50px;
-      padding: 40px 20px;
-      background-color: #ffffff;
-      border-radius: 15px;
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-      text-align: center;
-    }
-
-    .popular-routes h3 {
-      font-size: 28px;
-      color: #2c3e50;
-      margin-bottom: 30px;
-      text-transform: uppercase;
-      font-weight: bold;
-    }
-
-    .route-list {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-
-    .route-card {
-      background-color: #ffffff;
-      border: 1px solid #ddd;
-      border-radius: 10px;
-      padding: 20px;
-      text-align: center;
-      width: 280px;
-      transition: all 0.3s ease-in-out;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    }
-
-    .route-card:hover {
-      transform: scale(1.05);
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-    }
-
-    .route-card .route-info {
-      font-size: 18px;
-      color: #34495e;
-      margin-bottom: 10px;
-    }
-
-    .route-card .route-info span {
-      font-weight: bold;
-    }
-
-    .route-card .route-price {
-      font-size: 24px;
-      color: #3498db;
-      font-weight: bold;
-      margin-top: 15px;
-    }
-
-    .route-card .route-arrow {
-      font-size: 24px;
-      color: #34495e;
-      margin: 0 5px;
-    }
-  </style>
-</head>
-<body>
-  <div class="toggle-container">
-    <label for="darkModeToggle" class="switch">
-      <input type="checkbox" id="darkModeToggle">
-      <span class="slider"></span>
-    </label>
+{% block content %}
+<main>
+  <div class="hero-section animated fadeIn">
+    <h1>SaparTime - Саяхатыңыз біздің қолымызда!</h1>
+    <p class="hero-description">Қазақстанның кез келген қаласына билеттерді жылдам және ыңғайлы сатып алыңыз</p>
   </div>
 
-  {% block content %}
-  <main>
-    <div class="index">
-      <center>
-        <form method="POST" action="{% url 'find_trains' %}">
-          {% csrf_token %}
-          <section id="search">
-              <h2>Билеттерді іздеу</h2>
-              <div class="text-field">
-                  <label class="text-field__label" for="from_city">Қайдан:</label>
-                  <select class="text-field__input" id="from_city" name="from_city">
-                    <option value="" selected disabled hidden>Таңдау үшін басыңыз</option>
-                      {% for from_city in from_city %}
-                          <option value="{{ from_city.city }}">{{ from_city.city }}</option>
-                      {% endfor %}
-                  </select>
-                  <br>
-                  <div class="text-field__message"></div>
-                  <label class="text-field__label" for="to_city">Қайда:</label>
-                  <select class="text-field__input" id="to_city" name="to_city">
-                    <option value="" selected disabled hidden>Таңдау үшін басыңыз</option>
-                    {% for to_city in to_city %}
-                        <option value="{{ to_city.city }}">{{ to_city.city }}</option>
-                    {% endfor %}
-                  </select>
-                  <div class="text-field__message"></div>
-              </div>
-              <br>
-              <label for="date">Күні:</label>
-              <input type="date" id="date" name="date">
-          </section>
-          <button type="submit" class="custom-btn btn-3">
-              <span>Билеттерді іздеу</span>
+  <!-- Улучшенный блок поиска билетов -->
+  <div class="search-container animated fadeInUp">
+    <form method="POST" action="{% url 'find_trains' %}" class="modern-search-form">
+      {% csrf_token %}
+      <section id="search" class="search-card">
+        <div class="search-header">
+          <h2>Билеттерді іздеу</h2>
+          <p class="search-subtitle">Бағытты, күнді таңдап, билеттерді іздеңіз</p>
+        </div>
+        
+        <div class="search-body">
+          <div class="direction-container">
+            <div class="direction-field">
+              <label class="search-label" for="from_city">
+                <span class="icon-wrapper">
+                  <span class="departure-icon"></span>
+                </span>
+                <span>Қайдан:</span>
+              </label>
+              <select class="search-select" id="from_city" name="from_city" required>
+                <option value="" selected disabled hidden>Қаланы таңдаңыз</option>
+                {% for from_city in from_city %}
+                  <option value="{{ from_city.city }}">{{ from_city.city }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            
+            <div class="direction-switcher" id="directionSwitcher">
+              <button type="button" class="switch-button" aria-label="Бағыттарды ауыстыру">
+                <span class="switch-icon">⇄</span>
+              </button>
+            </div>
+            
+            <div class="direction-field">
+              <label class="search-label" for="to_city">
+                <span class="icon-wrapper">
+                  <span class="arrival-icon"></span>
+                </span>
+                <span>Қайда:</span>
+              </label>
+              <select class="search-select" id="to_city" name="to_city" required>
+                <option value="" selected disabled hidden>Қаланы таңдаңыз</option>
+                {% for to_city in to_city %}
+                  <option value="{{ to_city.city }}">{{ to_city.city }}</option>
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+          
+          <div class="date-container">
+            <label class="search-label" for="date">
+              <span class="icon-wrapper">
+                <span class="calendar-icon"></span>
+              </span>
+              <span>Жол жүру күні:</span>
+            </label>
+            <input type="date" id="date" name="date" class="search-input" required>
+            <div class="date-hint">
+              <span id="selectedDateText">Күнді таңдаңыз</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="search-footer">
+          <button type="submit" class="search-button pulse-animation">
+            <span class="search-icon"></span>
+            <span>Билеттерді іздеу</span>
           </button>
-        </form>
-      </center>
-    </div>
+          <div class="search-tips">
+            <div class="tip-text">
+              <span class="tip-icon">💡</span>
+              <span>Кеңес: билеттерді алдын ала брондаңыз</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </form>
+  </div>
 
-    <div class="popular-routes">
-      <h3>Танымал бағыттар</h3>
-      <div class="route-list">
-        <div class="route-card">
+  <div class="popular-routes">
+    <h3>Танымал бағыттар</h3>
+    <div class="route-list">
+      <div class="route-card">
+        <div class="route-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 15V18C4 18.5523 4.44772 19 5 19H19C19.5523 19 20 18.5523 20 18V15" stroke="#007bff" stroke-width="2" stroke-linecap="round"/>
+            <rect x="6" y="9" width="12" height="6" rx="1" stroke="#007bff" stroke-width="2"/>
+            <path d="M8 9V6C8 4.89543 8.89543 4 10 4H14C15.1046 4 16 4.89543 16 6V9" stroke="#007bff" stroke-width="2"/>
+            <circle cx="9" cy="15" r="1" fill="#007bff"/>
+            <circle cx="15" cy="15" r="1" fill="#007bff"/>
+          </svg>
+        </div>
+        <div class="route-cities">
           <div class="route-info">
             <span>Астана</span>
             <span class="route-arrow">→</span>
             <span>Алматы</span>
           </div>
-          <div class="route-price">12,000 ₸</div>
         </div>
+        <div class="route-details">
+          <div class="route-time"><i class="time-icon"></i>15 сағат</div>
+          <div class="route-distance"><i class="distance-icon"></i>1300 км</div>
+        </div>
+        <div class="route-price">12,000 ₸</div>
+        <a href="#" class="route-button">Таңдау</a>
+      </div>
 
-        <div class="route-card">
+      <div class="route-card">
+        <div class="route-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 15V18C4 18.5523 4.44772 19 5 19H19C19.5523 19 20 18.5523 20 18V15" stroke="#007bff" stroke-width="2" stroke-linecap="round"/>
+            <rect x="6" y="9" width="12" height="6" rx="1" stroke="#007bff" stroke-width="2"/>
+            <path d="M8 9V6C8 4.89543 8.89543 4 10 4H14C15.1046 4 16 4.89543 16 6V9" stroke="#007bff" stroke-width="2"/>
+            <circle cx="9" cy="15" r="1" fill="#007bff"/>
+            <circle cx="15" cy="15" r="1" fill="#007bff"/>
+          </svg>
+        </div>
+        <div class="route-cities">
           <div class="route-info">
             <span>Қарағанды</span>
             <span class="route-arrow">→</span>
             <span>Астана</span>
           </div>
-          <div class="route-price">8,500 ₸</div>
         </div>
+        <div class="route-details">
+          <div class="route-time"><i class="time-icon"></i>4 сағат</div>
+          <div class="route-distance"><i class="distance-icon"></i>220 км</div>
+        </div>
+        <div class="route-price">8,500 ₸</div>
+        <a href="#" class="route-button">Таңдау</a>
+      </div>
 
-        <div class="route-card">
+      <div class="route-card">
+        <div class="route-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 15V18C4 18.5523 4.44772 19 5 19H19C19.5523 19 20 18.5523 20 18V15" stroke="#007bff" stroke-width="2" stroke-linecap="round"/>
+            <rect x="6" y="9" width="12" height="6" rx="1" stroke="#007bff" stroke-width="2"/>
+            <path d="M8 9V6C8 4.89543 8.89543 4 10 4H14C15.1046 4 16 4.89543 16 6V9" stroke="#007bff" stroke-width="2"/>
+            <circle cx="9" cy="15" r="1" fill="#007bff"/>
+            <circle cx="15" cy="15" r="1" fill="#007bff"/>
+          </svg>
+        </div>
+        <div class="route-cities">
           <div class="route-info">
             <span>Алматы</span>
             <span class="route-arrow">→</span>
             <span>Шымкент</span>
           </div>
-          <div class="route-price">10,500 ₸</div>
         </div>
+        <div class="route-details">
+          <div class="route-time"><i class="time-icon"></i>10 сағат</div>
+          <div class="route-distance"><i class="distance-icon"></i>700 км</div>
+        </div>
+        <div class="route-price">10,500 ₸</div>
+        <a href="#" class="route-button">Таңдау</a>
       </div>
     </div>
-  </main>
-  {% endblock content %}
+  </div>
 
-  <script>
-    const darkModeToggle = document.getElementById('darkModeToggle');
-    darkModeToggle.addEventListener('change', () => {
-      document.body.classList.toggle('dark-mode', darkModeToggle.checked);
-    });
-  </script>
-</body>
-</html>
+  <div class="benefits-section">
+    <h3>Біздің артықшылықтарымыз</h3>
+    <div class="benefits-container">
+      <div class="benefit-card">
+        <div class="benefit-icon">
+          <i class="benefit-icon-fast"></i>
+        </div>
+        <h4>Жылдам брондау</h4>
+        <p>Бірнеше минут ішінде билетті таңдап, сатып алыңыз</p>
+      </div>
+      
+      <div class="benefit-card">
+        <div class="benefit-icon">
+          <i class="benefit-icon-price"></i>
+        </div>
+        <h4>Тиімді бағалар</h4>
+        <p>Біз әрқашан ең жақсы бағаларды ұсынамыз</p>
+      </div>
+      
+      <div class="benefit-card">
+        <div class="benefit-icon">
+          <i class="benefit-icon-support"></i>
+        </div>
+        <h4>24/7 қолдау</h4>
+        <p>Біздің қолдау қызметі әрқашан көмектесуге дайын</p>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Анимация появления элементов
+    function animateElements() {
+      const elements = document.querySelectorAll('.animated');
+      elements.forEach((element, index) => {
+        setTimeout(() => {
+          element.classList.add('visible');
+        }, 200 * index);
+      });
+    }
+    
+    animateElements();
+    
+    // Функционал переключения направлений
+    const directionSwitcher = document.getElementById('directionSwitcher');
+    if (directionSwitcher) {
+      directionSwitcher.addEventListener('click', function() {
+        const fromCity = document.getElementById('from_city');
+        const toCity = document.getElementById('to_city');
+        
+        // Сохраняем текущие значения
+        const fromValue = fromCity.value;
+        const toValue = toCity.value;
+        
+        // Меняем значения местами
+        fromCity.value = toValue;
+        toCity.value = fromValue;
+        
+        // Анимация для кнопки
+        this.classList.add('rotate');
+        setTimeout(() => {
+          this.classList.remove('rotate');
+        }, 500);
+      });
+    }
+    
+    // Отображение выбранной даты в понятном формате
+    const dateInput = document.getElementById('date');
+    const selectedDateText = document.getElementById('selectedDateText');
+    
+    if (dateInput && selectedDateText) {
+      // Устанавливаем минимальную дату - сегодня
+      const today = new Date();
+      const yyyy = today.getFullYear();
+      const mm = String(today.getMonth() + 1).padStart(2, '0');
+      const dd = String(today.getDate()).padStart(2, '0');
+      dateInput.min = `${yyyy}-${mm}-${dd}`;
+      
+      // Обновляем текст при изменении даты
+      dateInput.addEventListener('change', function() {
+        if (this.value) {
+          const dateParts = this.value.split('-');
+          const year = dateParts[0];
+          const month = dateParts[1];
+          const day = dateParts[2];
+          
+          // Названия месяцев на казахском
+          const monthNames = [
+            'қаңтар', 'ақпан', 'наурыз', 'сәуір', 'мамыр', 'маусым',
+            'шілде', 'тамыз', 'қыркүйек', 'қазан', 'қараша', 'желтоқсан'
+          ];
+          
+          const monthName = monthNames[parseInt(month) - 1];
+          selectedDateText.textContent = `${day} ${monthName}, ${year} ж.`;
+          
+          // Добавляем класс для стилизации
+          selectedDateText.classList.add('date-selected');
+        } else {
+          selectedDateText.textContent = 'Күнді таңдаңыз';
+          selectedDateText.classList.remove('date-selected');
+        }
+      });
+    }
+    
+    // Анимация кнопки
+    const searchButton = document.querySelector('.search-button');
+    if (searchButton) {
+      searchButton.addEventListener('mouseover', function() {
+        this.classList.add('pulse');
+      });
+      
+      searchButton.addEventListener('mouseout', function() {
+        this.classList.remove('pulse');
+      });
+    }
+  });
+</script>
+{% endblock content %}

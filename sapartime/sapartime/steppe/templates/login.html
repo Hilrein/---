@@ -11,41 +11,49 @@
 </head>
 <body>
   {% block content %}
-  <main>
-    <center>
-    <h2>Авторизация</h2>
-    <div class="auth-buttons">
-      <div style="max-width: 500px; margin-left: auto; margin-right: auto; padding: 15px;">
-        <div class="login-btn">
-          <form method="POST">
-            {% csrf_token %}
-            <div class="text-field">
-              <label class="text-field__label" for="username">Пайдаланушы аты</label>
-              <input class="text-field__input" type="text" name="username" id="username" required>
-              <div class="text-field__message"></div>
-            </div>
-            <div class="text-field">
-              <label class="text-field__label" for="password">Құпия сөз</label>
-              <input class="text-field__input" type="password" name="password" id="password">
-              <div class="text-field__message"></div>
-              <br>
-            </div>
-            {% if form.errors %}
-              {% for field, error_list in form.errors.items %}
-                {% for error in error_list %}
-                  <p>{{ error }}</p>
-                {% endfor %}
-              {% endfor %}
-            {% endif %}
-            <button type="submit" class="custom-btn btn-3">
-              <span>Кіру</span>
-            </button>
-          </form>
-          <p><a href="/registration"> Тіркелу</a> егер сіздің тіркелген аккаутыңыз болмаса. </p>
-        </div>
+  <div class="auth-page">
+    <div class="auth-container">
+      <div class="auth-header">
+        <h1>Кіру</h1>
+        <p>SaparTime аккаунтыңызға кіріңіз</p>
       </div>
-    </center>
-  </main>
+      
+      <form method="POST" class="auth-form">
+        {% csrf_token %}
+        
+        <div class="form-group">
+          <label for="username">Пайдаланушы аты</label>
+          <input type="text" name="username" id="username" placeholder="Пайдаланушы атын енгізіңіз" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="password">Құпия сөз</label>
+          <input type="password" name="password" id="password" placeholder="Құпия сөзді енгізіңіз" required>
+        </div>
+        
+        {% if form.errors %}
+          <div class="error-container">
+            {% for field, error_list in form.errors.items %}
+              {% for error in error_list %}
+                <div class="error-message">{{ error }}</div>
+              {% endfor %}
+            {% endfor %}
+          </div>
+        {% endif %}
+        
+        <div class="form-checkbox">
+          <input type="checkbox" name="remember_me" id="remember_me">
+          <label for="remember_me">Мені есте сақтау</label>
+        </div>
+        
+        <button type="submit" class="auth-button">Кіру</button>
+      </form>
+      
+      <div class="auth-footer">
+        <p>Аккаунтыңыз жоқ па? <a href="/registration">Тіркелу</a></p>
+      </div>
+    </div>
+  </div>
   {% endblock content %}
 </body>
 </html>

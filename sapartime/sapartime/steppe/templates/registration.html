@@ -11,67 +11,69 @@
 </head>
 <body>
   {% block content %}
-  <main>
-    <center>
-    <h2>Тіркеу</h2>
-    <div class="auth-buttons">
-      <div style="max-width: 500px; margin-left: auto; margin-right: auto; padding: 15px;">
-        <form method="post">
-          {% csrf_token %}
-          <div class="text-field">
-            <label class="text-field__label" for="first_name">Аты-жөні (Міндетті)</label>
-            <input class="text-field__input" type="text" name="first_name" id="first_name" required>
-            <div class="text-field__message"></div>
-          </div>
-          <div class="text-field">
-            <label class="text-field__label" for="username">Пайдаланушы аты (Міндетті)</label>
-            <input class="text-field__input" type="text" name="username" id="username" required>
-            <div class="text-field__message"></div>
-          </div>
-          <div class="text-field">
-            <label class="text-field__label" for="email">Электрондық пошта (Міндетті)</label>
-            <input class="text-field__input" type="email" name="email" id="email" required>
-            <div class="text-field__message"></div>
-          </div>
-          <div class="text-field">
-            <label class="text-field__label" for="password">Құпия сөз</label>
-            <input class="text-field__input" type="password" name="password1" id="password1">
-            <div class="text-field__message"></div>
-            <br>
-          <div class="text-field">
-            <label class="text-field__label" for="password">Құпия сөзді қайталаңыз</label>
-            <input class="text-field__input" type="password" name="password2" id="password2">
-            <div class="text-field__message"></div>
-          </div>
-          <div class="text-field">
-            <input type="checkbox" name="save_password" id="save_password" />
-            <label for="save_password">Парольді сақтау</label>
-          </div>
+  <div class="auth-page">
+    <div class="auth-container">
+      <div class="auth-header">
+        <h1>Тіркеу</h1>
+        <p>SaparTime қызметіне қош келдіңіз</p>
+      </div>
+      
+      <form method="post" class="auth-form">
+        {% csrf_token %}
+        
+        <div class="form-group">
+          <label for="first_name">Аты-жөні</label>
+          <input type="text" name="first_name" id="first_name" placeholder="Аты-жөніңізді енгізіңіз" required>
           {% if form.first_name.errors %}
-            {{ form.first_name.errors }}
+            <div class="error-message">{{ form.first_name.errors }}</div>
           {% endif %}
+        </div>
+        
+        <div class="form-group">
+          <label for="username">Пайдаланушы аты</label>
+          <input type="text" name="username" id="username" placeholder="Пайдаланушы атын енгізіңіз" required>
           {% if form.username.errors %}
-            {{ form.username.errors }}
+            <div class="error-message">{{ form.username.errors }}</div>
           {% endif %}
+        </div>
+        
+        <div class="form-group">
+          <label for="email">Электрондық пошта</label>
+          <input type="email" name="email" id="email" placeholder="Электрондық поштаңызды енгізіңіз" required>
           {% if form.email.errors %}
-            {{ form.email.errors }}
+            <div class="error-message">{{ form.email.errors }}</div>
           {% endif %}
+        </div>
+        
+        <div class="form-group">
+          <label for="password1">Құпия сөз</label>
+          <input type="password" name="password1" id="password1" placeholder="Құпия сөзді енгізіңіз" required>
           {% if form.password1.errors %}
-            {{ form.password1.errors }}
+            <div class="error-message">{{ form.password1.errors }}</div>
           {% endif %}
+        </div>
+        
+        <div class="form-group">
+          <label for="password2">Құпия сөзді қайталаңыз</label>
+          <input type="password" name="password2" id="password2" placeholder="Құпия сөзді қайталап енгізіңіз" required>
           {% if form.password2.errors %}
-            {{ form.password2.errors }}
+            <div class="error-message">{{ form.password2.errors }}</div>
           {% endif %}
-          <button type="submit" class="custom-btn btn-3">
-              <span>Жіберу</span>
-          </button>
-          <br>
-        </form>
-        <p><a href="/login">Кіру</a> егер сізде бар аккаунт болса.</p>
+        </div>
+        
+        <div class="form-checkbox">
+          <input type="checkbox" name="save_password" id="save_password">
+          <label for="save_password">Парольді сақтау</label>
+        </div>
+        
+        <button type="submit" class="auth-button">Тіркелу</button>
+      </form>
+      
+      <div class="auth-footer">
+        <p>Сізде аккаунт бар ма? <a href="/login">Кіру</a></p>
       </div>
     </div>
-    </center>
-  </main>
+  </div>
   {% endblock content %}
 </body>
 </html>

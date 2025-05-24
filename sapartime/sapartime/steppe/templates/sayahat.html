@@ -1,152 +1,98 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="kk">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Саяхатшылар әлемі</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.5;
-            background-color: #f9f9f9;
-            margin: 0;
-            padding: 0;
-        }
 
-        .header {
-            background-color: #007bff;
-            color: white;
-            padding: 20px 0;
-            text-align: center;
-            font-size: 24px;
-            font-weight: bold;
-        }
-
-        .container {
-            max-width: 600px;
-            margin: 20px auto;
-            background: #fff;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        h1 {
-            text-align: center;
-            color: #333;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 5px;
-            color: #555;
-        }
-
-        input[type="text"], textarea {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 14px;
-            box-sizing: border-box;
-        }
-
-        textarea {
-            height: 100px;
-            resize: none;
-        }
-
-        button {
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        button:hover {
-            background-color: #0056b3;
-        }
-
-        .photo-container {
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        img {
-            width: 100%;
-            max-width: 500px;
-            border-radius: 10px;
-            transition: transform 0.5s ease;
-        }
-
-        img:hover {
-            transform: scale(1.1);
-        }
-
-        .review {
-            margin-top: 20px;
-        }
-
-        .review h3 {
-            color: #333;
-        }
-
-        .like-dislike {
-            margin-top: 10px;
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .like-dislike button {
-            background: none;
-            border: none;
-            font-size: 24px;
-            cursor: pointer;
-        }
-
-        .like-dislike button:hover {
-            opacity: 0.7;
-        }
-
-        .liked {
-            color: green;
-        }
-
-        .disliked {
-            color: red;
-        }
-
-        .like-dislike span {
-            font-size: 18px;
-            margin-left: 5px;
-        }
-
-    </style>
-</head>
-<body>
-    <div class="header">
-        Саяхатшылар әлемі
+{% block content %}
+<div class="travel-container">
+    <h1 class="travel-title">Саяхатшылар әлемі</h1>
+    
+    <div class="travel-intro">
+        <p>Бұл бетте Қазақстанның әр түрлі қалалары мен көрікті жерлері туралы ақпарат таба аласыз. Саяхат жоспарлауға арналған пайдалы кеңестер мен ұсыныстар.</p>
+    </div>
+    
+    <div class="destinations">
+        <h2>Танымал бағыттар</h2>
+        
+        <div class="destination-grid">
+            <div class="destination-card">
+                <img src="{% static 'img/almaty.jpg' %}" alt="Алматы" class="destination-image">
+                <div class="destination-info">
+                    <h3>Алматы</h3>
+                    <p>Қазақстанның ең үлкен қаласы және мәдени орталығы. Көгалдандырылған көшелері, тауларға керемет көрінісі және көптеген мұражайлары бар.</p>
+                    <a href="#" class="destination-link">Көбірек білу</a>
+                </div>
+            </div>
+            
+            <div class="destination-card">
+                <img src="{% static 'img/astana.jpg' %}" alt="Астана" class="destination-image">
+                <div class="destination-info">
+                    <h3>Астана</h3>
+                    <p>Қазақстанның астанасы - заманауи сәулет және инновациялық дизайнның үлгісі. Бәйтерек мұнарасы және басқа да көрікті жерлер.</p>
+                    <a href="#" class="destination-link">Көбірек білу</a>
+                </div>
+            </div>
+            
+            <div class="destination-card">
+                <img src="{% static 'img/shymkent.jpg' %}" alt="Шымкент" class="destination-image">
+                <div class="destination-info">
+                    <h3>Шымкент</h3>
+                    <p>Оңтүстік Қазақстанның ең үлкен қаласы, бай тарихы мен мәдениеті, дәмді тағамдары және қонақжай тұрғындары бар.</p>
+                    <a href="#" class="destination-link">Көбірек білу</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="travel-tips">
+        <h2>Саяхат кеңестері</h2>
+        
+        <div class="tips-list">
+            <div class="tip-item">
+                <div class="tip-icon">🧳</div>
+                <div class="tip-content">
+                    <h3>Жол жүгін дұрыс жинаңыз</h3>
+                    <p>Саяхатқа шығу алдында ауа райын тексеріңіз және соған сәйкес киім алыңыз. Құжаттарыңызды қауіпсіз жерде сақтаңыз.</p>
+                </div>
+            </div>
+            
+            <div class="tip-item">
+                <div class="tip-icon">🚆</div>
+                <div class="tip-content">
+                    <h3>Пойызда жүру кезінде</h3>
+                    <p>Ұзақ жолға шығар алдында су және жеңіл тамақ алыңыз. Ұзақ саяхат кезінде өзіңізді алаңдату үшін кітап немесе музыка дайындаңыз.</p>
+                </div>
+            </div>
+            
+            <div class="tip-item">
+                <div class="tip-icon">📸</div>
+                <div class="tip-content">
+                    <h3>Естеліктерді сақтаңыз</h3>
+                    <p>Саяхат кезінде фотосуреттер түсіріп, күнделік жүргізіңіз. Бұл тамаша естеліктер болады.</p>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="container">
-        <h1>Өзіңіздің пікірлеріңізбен бөлісіңіз!</h1>
-        <p>Қала туралы пікірлермен және кеңестеріңізді жазыңыз!</p>
-        <p>Әзірше пікірлер жоқ. Бірінші болыңыз!</p>
-        <p><strong>Үздік кеңес үшін сыйлық және ұтыс ойыны болады. Толығырақ Instagram парақшасынан көре аласыз.</strong></p>
+    <div class="photo-gallery">
+        <h2>Сурет галереясы</h2>
+        <div class="photos-container">
+            <img src="{% static 'img/саяхат1.jpg' %}" alt="Сурет мысалы" id="dynamic-photo" class="gallery-photo">
+            <div class="photo-grid">
+                <img src="{% static 'img/саяхат1.jpg' %}" alt="Сурет мысалы" class="small-photo">
+                <img src="{% static 'img/саяхаті.jpg' %}" alt="Сурет мысалы" class="small-photo">
+                <img src="{% static 'img/саяхатә.jpg' %}" alt="Сурет мысалы" class="small-photo">
+            </div>
+        </div>
+    </div>
 
-        <form id="reviewForm">
+    <div class="review-section">
+        <h2>Өзіңіздің пікірлеріңізбен бөлісіңіз!</h2>
+        <div class="review-intro">
+            <p>Қала туралы пікірлермен және кеңестеріңізді жазыңыз!</p>
+            <p>Әзірше пікірлер жоқ. Бірінші болыңыз!</p>
+            <p><strong>Үздік кеңес үшін сыйлық және ұтыс ойыны болады. Толығырақ Instagram парақшасынан көре аласыз.</strong></p>
+        </div>
+        
+        <form id="reviewForm" class="review-form">
             <div class="form-group">
                 <label for="city">Қала</label>
                 <input type="text" id="city" placeholder="Қаланы енгізіңіз" required>
@@ -155,22 +101,422 @@
                 <label for="description">Сипаттама</label>
                 <textarea id="description" placeholder="Қала туралы пікіріңізді жазыңыз" required></textarea>
             </div>
-            <button type="submit">Жіберу</button>
-            <a href="/" class="btn">Басты бетке</a>
+            <div class="form-buttons">
+                <button type="submit" class="submit-button">Жіберу</button>
+                <a href="/" class="home-button">Басты бетке</a>
+            </div>
         </form>
-
-        <div class="photo-container">
-            <h2>Сурет:</h2>
-            <img src="{% static 'img/саяхат1.jpg' %}" alt="Сурет мысалы" id="dynamic-photo">
-            <img src="{% static 'img/саяхатә.jpg' %}" alt="Сурет мысалы" id="dynamic-photo">
-            <img src="{% static 'img/саяхаті.jpg' %}" alt="Сурет мысалы" id="dynamic-photo">
-        </div>
-
-        <div id="reviewsSection" class="review">
-        </div>
+        
+        <div id="reviewsSection" class="reviews-list"></div>
     </div>
+    
+    
+</div>
 
-    <script>
+<style>
+    .travel-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 40px 20px;
+    }
+
+    .travel-title {
+        text-align: center;
+        color: #007bff;
+        font-size: 36px;
+        margin-bottom: 30px;
+    }
+    
+    .travel-intro {
+        text-align: center;
+        margin-bottom: 50px;
+        font-size: 18px;
+        color: #555;
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .destinations, .travel-tips, .travel-blog, .photo-gallery, .review-section {
+        margin-bottom: 60px;
+    }
+    
+    .destinations h2, .travel-tips h2, .travel-blog h2, .photo-gallery h2, .review-section h2 {
+        color: #333;
+        font-size: 28px;
+        margin-bottom: 25px;
+        border-bottom: 2px solid #007bff;
+        padding-bottom: 10px;
+    }
+    
+    .destination-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+        gap: 30px;
+    }
+    
+    .destination-card {
+        background: #fff;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        transition: transform 0.3s;
+    }
+    
+    .destination-card:hover {
+        transform: translateY(-10px);
+    }
+    
+    .destination-image {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
+    
+    .destination-info {
+        padding: 20px;
+    }
+
+    .destination-info h3 {
+        color: #007bff;
+        margin-top: 0;
+        margin-bottom: 10px;
+    }
+
+    .destination-info p {
+        color: #666;
+        margin-bottom: 15px;
+    }
+
+    .destination-link {
+        display: inline-block;
+        padding: 8px 15px;
+        background: #007bff;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: 500;
+        transition: background 0.3s;
+    }
+
+    .destination-link:hover {
+        background: #0056b3;
+    }
+    
+    .tips-list {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .tip-item {
+        display: flex;
+        background: #f8f9fa;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+    }
+    
+    .tip-icon {
+        font-size: 32px;
+        margin-right: 20px;
+        display: flex;
+        align-items: center;
+    }
+
+    .tip-content h3 {
+        margin-top: 0;
+        color: #333;
+    }
+
+    .tip-content p {
+        color: #666;
+        margin-bottom: 0;
+    }
+
+    .blog-posts {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+        gap: 30px;
+    }
+    
+    .blog-post {
+        background: #fff;
+        padding: 25px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    }
+
+    .blog-post h3 {
+        color: #333;
+        margin-top: 0;
+    }
+    
+    .post-meta {
+        color: #888;
+        font-size: 14px;
+        margin-bottom: 15px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .post-link {
+        display: inline-block;
+        margin-top: 10px;
+        color: #007bff;
+        text-decoration: none;
+        font-weight: 500;
+    }
+    
+    .post-link:hover {
+        text-decoration: underline;
+    }
+    
+    /* Стили для фотогалереи */
+    .photos-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+    
+    .gallery-photo {
+        width: 100%;
+        max-width: 700px;
+        height: 400px;
+        object-fit: cover;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        transition: transform 0.5s ease;
+    }
+    
+    .gallery-photo:hover {
+        transform: scale(1.02);
+    }
+    
+    .photo-grid {
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+    }
+    
+    .small-photo {
+        width: 120px;
+        height: 80px;
+        object-fit: cover;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    
+    .small-photo:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 10px rgba(0,0,0,0.15);
+    }
+    
+    /* Стили для формы отзывов */
+    .review-section {
+        background: #f8f9fa;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 3px 15px rgba(0,0,0,0.05);
+    }
+    
+    .review-intro {
+        margin-bottom: 20px;
+    }
+    
+    .review-form {
+        background: #fff;
+        padding: 25px;
+        border-radius: 10px;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        margin-bottom: 30px;
+    }
+    
+    .form-group {
+        margin-bottom: 20px;
+    }
+    
+    .form-group label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 8px;
+        color: #333;
+    }
+    
+    .form-group input, .form-group textarea {
+        width: 100%;
+        padding: 12px 15px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        font-size: 16px;
+        transition: all 0.3s ease;
+    }
+    
+    .form-group input:focus, .form-group textarea:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+        outline: none;
+    }
+    
+    .form-group textarea {
+        height: 120px;
+        resize: vertical;
+    }
+    
+    .form-buttons {
+        display: flex;
+        gap: 15px;
+        margin-top: 20px;
+    }
+    
+    .submit-button {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 12px 25px;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    
+    .submit-button:hover {
+        background-color: #0056b3;
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(0, 123, 255, 0.2);
+    }
+    
+    .home-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #f8f9fa;
+        color: #333;
+        border: 1px solid #ddd;
+        padding: 12px 25px;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 500;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+    
+    .home-button:hover {
+        background-color: #e9ecef;
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Стили для списка отзывов */
+    .reviews-list {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .single-review {
+        background: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        transition: all 0.3s ease;
+    }
+    
+    .single-review:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+    
+    .single-review h3 {
+        color: #007bff;
+        margin-top: 0;
+        margin-bottom: 10px;
+    }
+    
+    .like-dislike {
+        margin-top: 15px;
+        display: flex;
+        gap: 20px;
+        align-items: center;
+    }
+    
+    .like, .dislike {
+        background: none;
+        border: none;
+        font-size: 24px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+    }
+    
+    .like:hover, .dislike:hover {
+        transform: scale(1.2);
+    }
+    
+    .like-count, .dislike-count {
+        margin-left: 5px;
+        font-size: 16px;
+        font-weight: 500;
+    }
+    
+    .liked {
+        color: #28a745;
+    }
+    
+    .disliked {
+        color: #dc3545;
+    }
+    
+    @media (max-width: 768px) {
+        .destination-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .blog-posts {
+            grid-template-columns: 1fr;
+        }
+
+        .tip-item {
+            flex-direction: column;
+        }
+        
+        .tip-icon {
+            margin-right: 0;
+            margin-bottom: 15px;
+        }
+        
+        .gallery-photo {
+            height: 300px;
+        }
+        
+        .photo-grid {
+            flex-wrap: wrap;
+        }
+        
+        .form-buttons {
+            flex-direction: column;
+        }
+    }
+    
+    @media (max-width: 576px) {
+        .gallery-photo {
+            height: 250px;
+        }
+        
+        .small-photo {
+            width: 80px;
+            height: 60px;
+        }
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Обработчик формы отзывов
         const reviewForm = document.getElementById('reviewForm');
         const reviewsSection = document.getElementById('reviewsSection');
 
@@ -198,58 +544,61 @@
                 document.getElementById('description').value = '';
             }
         });
+
+        // Обработчик лайков и дизлайков
         document.addEventListener('click', function(event) {
             if (event.target.classList.contains('like')) {
                 const likeButton = event.target;
-                const dislikeButton = likeButton.nextElementSibling.previousElementSibling;
                 const likeCount = likeButton.nextElementSibling;
+                const dislikeButton = likeCount.nextElementSibling;
                 const dislikeCount = dislikeButton.nextElementSibling;
 
-                likeButton.classList.toggle('liked');
-                dislikeButton.classList.remove('disliked');
-
                 if (likeButton.classList.contains('liked')) {
-                    likeCount.textContent = parseInt(likeCount.textContent) + 1;
-                } else {
+                    likeButton.classList.remove('liked');
                     likeCount.textContent = parseInt(likeCount.textContent) - 1;
-                }
-
-                if (dislikeButton.classList.contains('disliked')) {
-                    dislikeCount.textContent = parseInt(dislikeCount.textContent) - 1;
+                } else {
+                    likeButton.classList.add('liked');
+                    likeCount.textContent = parseInt(likeCount.textContent) + 1;
+                    
+                    if (dislikeButton.classList.contains('disliked')) {
+                        dislikeButton.classList.remove('disliked');
+                        dislikeCount.textContent = parseInt(dislikeCount.textContent) - 1;
+                    }
                 }
             }
+            
             if (event.target.classList.contains('dislike')) {
                 const dislikeButton = event.target;
+                const dislikeCount = dislikeButton.nextElementSibling;
                 const likeButton = dislikeButton.previousElementSibling.previousElementSibling;
                 const likeCount = likeButton.nextElementSibling;
-                const dislikeCount = dislikeButton.nextElementSibling;
-
-                dislikeButton.classList.toggle('disliked');
-                likeButton.classList.remove('liked');
 
                 if (dislikeButton.classList.contains('disliked')) {
-                    dislikeCount.textContent = parseInt(dislikeCount.textContent) + 1;
-                } else {
+                    dislikeButton.classList.remove('disliked');
                     dislikeCount.textContent = parseInt(dislikeCount.textContent) - 1;
-                }
-                if (likeButton.classList.contains('liked')) {
-                    likeCount.textContent = parseInt(likeCount.textContent) - 1;
+                } else {
+                    dislikeButton.classList.add('disliked');
+                    dislikeCount.textContent = parseInt(dislikeCount.textContent) + 1;
+                    
+                    if (likeButton.classList.contains('liked')) {
+                        likeButton.classList.remove('liked');
+                        likeCount.textContent = parseInt(likeCount.textContent) - 1;
+                    }
                 }
             }
         });
 
-        const photo = document.getElementById('dynamic-photo');
-        const photos = [
-        {% static 'img/саяхат1.jpg' %},
-        {% static 'img/саяхаті.jpg' %},
-        {% static 'img/саяхатә.jpg' %},
-        ];
-
-        let currentPhoto = 0;
-        setInterval(() => {
-            currentPhoto = (currentPhoto + 1) % photos.length;
-            photo.src = photos[currentPhoto];
-        }, 3000); 
-    </script>
-</body>
-</html>
+        // Галерея фотографий
+        const mainPhoto = document.getElementById('dynamic-photo');
+        const smallPhotos = document.querySelectorAll('.small-photo');
+        
+        // Смена фото при клике на миниатюру
+        smallPhotos.forEach(photo => {
+            photo.addEventListener('click', function() {
+                mainPhoto.src = this.src;
+                mainPhoto.alt = this.alt;
+            });
+        });
+    });
+</script>
+{% endblock content %}

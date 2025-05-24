@@ -1,116 +1,197 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="kk">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Байланыс - SaparTime</title>
-  <link rel="stylesheet" href="{% static 'css/style.css' %}" />
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #f4f4f4;
-      color: #333;
-    }
 
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-
-    .header {
-      text-align: center;
-      margin-bottom: 40px;
-    }
-
-    .header h1 {
-      font-size: 3rem;
-      margin: 0;
-      color: #007BFF; /* Синий цвет */
-    }
-
-    .contact-info {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 25px;
-      font-size: 1.2rem;
-    }
-
-    .contact-info p {
-      line-height: 1.6;
-      text-align: center;
-      max-width: 800px;
-    }
-
-    .social-icons {
-      display: flex;
-      justify-content: center;
-      gap: 30px;
-      margin-top: 30px;
-    }
-
-    .social-icons a {
-      font-size: 40px;
-      color: #007BFF; /* Синий цвет */
-      text-decoration: none;
-    }
-
-    .contact-info .whatsapp {
-      font-size: 1.5rem;
-      font-weight: bold;
-      color: #25D366; /* Цвет WhatsApp */
-    }
-
-    .footer {
-      background: #007BFF; /* Синий цвет */
-      color: white;
-      padding: 20px;
-      text-align: center;
-      margin-top: 40px;
-    }
-
-    .footer h2 {
-      margin: 0;
-      font-size: 2rem;
-    }
-
-    .footer p {
-      margin-top: 10px;
-      font-size: 1rem;
-    }
-  </style>
-</head>
-<body>
-
-  <div class="container">
-    <div class="header">
-      <h1>Бізбен қалай байланысуға болады</h1>
-    </div>
-
+{% block content %}
+<div class="contact-container">
+    <h1 class="contact-title">Байланыс</h1>
+    
     <div class="contact-info">
-      <p>Бізбен келесі байланыс арналарында хабарласа аласыз:</p>
-
-      <div class="social-icons">
-        <a href="https://www.instagram.com/sapartime.qz?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank"><i class="fab fa-instagram"></i></a>
-        <a href="https://t.me/sapartime_kz" target="_blank"><i class="fab fa-telegram"></i></a>
-      </div>
-
-      <p class="whatsapp">Біздің WhatsApp нөміріміз: +7 7476772378</p>
-
-      <p>Бізде бот бар, оған сіз өз шағымдарыңызды немесе мәселелеріңізді жібере аласыз. Менеджеріміз хабарламаны алғаннан кейін дереу сізбен байланысады. Біздің ботқа жазып, мәселеңізді шешеміз!</p>
+        <div class="contact-item">
+            <div class="contact-icon">
+                <img src="{% static 'img/phone-icon.png' %}" alt="Телефон">
+            </div>
+            <div class="contact-details">
+                <h3>Телефон</h3>
+                <p>+7 (747) 777-77-77</p>
+            </div>
+        </div>
+        
+        <div class="contact-item">
+            <div class="contact-icon">
+                <img src="{% static 'img/email-icon.png' %}" alt="Email">
+            </div>
+            <div class="contact-details">
+                <h3>Email</h3>
+                <p>support@sapartime.kz</p>
+            </div>
+        </div>
+        
+        <div class="contact-item">
+            <div class="contact-icon">
+                <img src="{% static 'img/location-icon.png' %}" alt="Мекенжай">
+            </div>
+            <div class="contact-details">
+                <h3>Мекенжай</h3>
+                <p>Қазақстан, Астана қ.</p>
+            </div>
+        </div>
     </div>
-
-    <div class="footer">
-      <h2>SaparTime</h2>
-      <p>Жоғарыда көрсетілген байланыс арналарымен бізбен хабарласыңыз.</p>
-      <a href="/" class="btn">Басты бетке</a>
+    
+    <div class="contact-form">
+        <h2>Бізге хабарласыңыз</h2>
+        <form action="#" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="name">Аты-жөні</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="message">Хабарлама</label>
+                <textarea id="message" name="message" rows="5" required></textarea>
+            </div>
+            
+            <button type="submit" class="submit-btn">Жіберу</button>
+        </form>
     </div>
-  </div>
+    
+    <div class="map-container">
+        <h2>Біздің орналасқан жеріміз</h2>
+        <div class="map">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2505.9636054244597!2d71.41559597727733!3d51.090679171721526!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x424585a605525605%3A0x4dff4a1973f7567e!2sAstana%20IT%20University!5e0!3m2!1sru!2skz!4v1748112607778!5m2!1sru!2skz" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+    </div>
+</div>
 
-</body>
-</html>
+<style>
+    .contact-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 40px 20px;
+    }
+    
+    .contact-title {
+        text-align: center;
+        color: #007bff;
+        margin-bottom: 40px;
+        font-size: 36px;
+    }
+    
+    .contact-info {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin-bottom: 50px;
+    }
+    
+    .contact-item {
+        flex-basis: 30%;
+        display: flex;
+        align-items: center;
+        margin-bottom: 30px;
+        background: #f8f9fa;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    }
+    
+    .contact-icon {
+        margin-right: 15px;
+    }
+    
+    .contact-icon img {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .contact-details h3 {
+        margin: 0 0 5px;
+        color: #333;
+    }
+    
+    .contact-details p {
+        margin: 0;
+        color: #666;
+    }
+    
+    .contact-form {
+        background: #f8f9fa;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+        margin-bottom: 50px;
+    }
+    
+    .contact-form h2 {
+        text-align: center;
+        margin-bottom: 30px;
+        color: #007bff;
+    }
+    
+    .form-group {
+        margin-bottom: 20px;
+    }
+    
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        color: #555;
+    }
+    
+    .form-group input,
+    .form-group textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+    
+    .submit-btn {
+        background: #007bff;
+        color: white;
+        border: none;
+        padding: 12px 25px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        display: block;
+        margin: 0 auto;
+    }
+    
+    .submit-btn:hover {
+        background: #0056b3;
+    }
+    
+    .map-container {
+        margin-top: 50px;
+    }
+    
+    .map-container h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #007bff;
+    }
+    
+    .map {
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+    }
+    
+    @media (max-width: 768px) {
+        .contact-info {
+            flex-direction: column;
+        }
+        
+        .contact-item {
+            flex-basis: 100%;
+        }
+    }
+</style>
+{% endblock content %}

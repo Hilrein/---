@@ -1,223 +1,188 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>О компании</title>
-  <style>
-    body {
-      font-family: 'Arial', sans-serif;
-      background-color: #e0f7ff; /* Более яркий голубой фон */
-      color: #333;
-      margin: 0;
-      padding: 0;
-    }
 
-    header {
-      background-color: #00bfff; /* Ярко-голубой для шапки */
-      color: white;
-      text-align: center;
-      padding: 60px 0;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    }
-
-    header h1 {
-      margin: 0;
-      font-size: 48px;
-      letter-spacing: 2px;
-    }
-
-    header p {
-      font-size: 22px;
-    }
-
-    .container {
-      width: 80%;
-      margin: 0 auto;
-      padding: 30px;
-    }
-
-    .about-section, .services-section, .history-section {
-      margin-bottom: 60px;
-    }
-
-    .about-section img, .history-section img {
-      width: 100%;
-      border-radius: 10px;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    }
-
-    .about-section h2, .history-section h2, .services-section h2 {
-      font-size: 36px;
-      text-align: center;
-      color: #00bfff;
-      margin-bottom: 20px;
-    }
-
-    .about-section p, .history-section p {
-      font-size: 18px;
-      line-height: 1.6;
-      text-align: justify;
-    }
-
-    .services-section {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
-    }
-
-    .service-item {
-      background-color: #b3e0ff;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      text-align: center;
-    }
-
-    .service-item h3 {
-      color: #0077b3;
-      font-size: 24px;
-      margin-bottom: 10px;
-    }
-
-    .service-item p {
-      font-size: 16px;
-      line-height: 1.5;
-    }
-    .service-item img {
-      max-width: 100%;  /* Изображение не будет выходить за пределы контейнера */
-      height: auto;     /* Сохранит пропорции изображения */
-      border-radius: 10px; /* Сохраняет скругление углов */
-    }
-
-    /* Карусель */
-    .carousel-container {
-      position: relative;
-      overflow: hidden;
-      margin-bottom: 40px;
-      border-radius: 10px;
-    }
-
-    .carousel {
-      display: flex;
-      transition: transform 0.5s ease;
-    }
-
-    .carousel img {
-      width: 100%;
-      border-radius: 10px;
-    }
-
-    .carousel-button {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background-color: rgba(0, 0, 0, 0.5);
-      color: white;
-      font-size: 24px;
-      padding: 10px;
-      cursor: pointer;
-      border: none;
-      border-radius: 50%;
-    }
-
-    .carousel-button.prev {
-      left: 10px;
-    }
-
-    .carousel-button.next {
-      right: 10px;
-    }
-  </style>
-</head>
-<body>
-
-  <header>
+{% block content %}
+<div class="about-page">
+  <div class="about-header">
     <h1>SaparTime</h1>
     <p>Пойыз билеттерін сатып алу және бүкіл Қазақстан бойынша саяхаттау</p>
-  </header>
-
-  <div class="container">
-    <!-- Раздел о компании -->
-    <section class="about-section">
-      <h2>Біз жайлы</h2>
-      <img src="{% static 'img/1 photo.jpg' %}" alt="Компания">
-      <p>SaparTime компаниясы 2024 жылы теміржол билеттерін брондау арқылы саяхатшыларға жоғары сапалы және ыңғайлы шешімдерді ұсыну мақсатымен құрылған. Біз әрбір клиенттің билеттерді оңай және ыңғайлы сатып алуына, сондай-ақ саяхат тәжірибесін жақсарта отырып, қосымша қызметтерге ие болуын қамтамасыз етуге тырысамыз. Біздің билеттерді біздің веб-сайт арқылы онлайн сатып алуға болады және олардың қауіпсіз болуына кепілдік беріледі.</p>
-    </section>
-
-    <!-- Раздел История компании -->
-    <section class="history-section">
-      <h2></h2>
-      <img src="{% static 'img/3 photo.jpg' %}" alt="История компании">
-      <p>SaparTime сізге ыңғайлы және жайлы саяхат әлемін ашады🚊 Ұзын кезектермен бас ауыртуыңызды ұмытып, поездға билетті бір басқаннан ақ брондаңыз. Біз сіздің саяхатыңыз тек жеңіл әрі жылдам болу үшін барлық процесті қарапайым еттік.
-      </p>
-    </section>
-
-    <!-- Карусель изображений -->
-    <div class="carousel-container">
-      <div class="carousel" id="carousel">
-        <img src="{% static 'img/4 photo.jpg' %}" alt="Картинка 1">
-        <img src="{% static 'img/1 photo.jpg' %}" alt="Картинка 2">
-        <img src="{% static 'img/2 photo.png' %}" alt="Картинка 3">
-      </div>
-      <button class="carousel-button prev" onclick="prevSlide()">&#10094;</button>
-      <button class="carousel-button next" onclick="nextSlide()">&#10095;</button>
-    </div>
-
-    <!-- Раздел Услуги -->
-    <section class="services-section">
-      <h2>Біздің қызметтер</h2>
-      <div class="service-item">
-        <h3>Теміржол билеттері</h3>
-        <img src="{% static 'img/билетбум.jpg' %}" alt="Железнодорожные билеты">
-        <p>Біздің веб-сайт арқылы бүкіл Қазақстан бойынша пойыз билеттерін оңай және жылдам сатып алыңыз.</p>
-      </div>
-      <div class="service-item">
-        <h3>Жол</h3>
-        <img src="{% static 'img/карта.jpg' %}" alt="Путеводители">
-        <p>Саяхат кезінде маршруттар, кестелер және тұру орындары туралы пайдалы ақпарат алыңыз.</p>
-      </div>
-      <div class="service-item">
-        <h3>Электронды билеттер</h3>
-        <img src="{% static 'img/электронб.jpg' %}" alt="Электронные билеты">
-        <p>Біздің электронды билеттеріміз жайлылық пен ыңғайлылыққа кепілдік береді. Оларды мобильді құрылғыда көрсете аласыз.</p>
-      </div>
-      <div class="service-item">
-        <h3>Клиенттерге қызмет көрсету</h3>
-        <img src="{% static 'img/обслуж.jpg' %}" alt="Обслуживание клиентов">
-        <p>Біздің мамандар билеттерді сатып алуға қатысты кез келген мәселелер бойынша көмектесуге және кеңес беруге әрқашан дайын.</p>
-        <a href="/" class="btn">Басты бетке</a>
-      </div>
-    </section>
-
   </div>
 
-  <script>
-    let currentIndex = 0;
+  <!-- Раздел о компании -->
+  <section class="about-section">
+    <h2>Компания туралы</h2>
+    <div class="about-content">
+      <div class="about-image">
+        <div class="image-container">
+          <img src="{% static 'img/1 photo.jpg' %}" alt="Компания">
+          <div class="image-overlay"></div>
+        </div>
+      </div>
+      <div class="about-text">
+        <p>SaparTime компаниясы 2024 жылы теміржол билеттерін брондау арқылы саяхатшыларға жоғары сапалы және ыңғайлы шешімдерді ұсыну мақсатымен құрылған. Біз әрбір клиенттің билеттерді оңай және ыңғайлы сатып алуына, сондай-ақ саяхат тәжірибесін жақсарта отырып, қосымша қызметтерге ие болуын қамтамасыз етуге тырысамыз. Біздің билеттерді біздің веб-сайт арқылы онлайн сатып алуға болады және олардың қауіпсіз болуына кепілдік беріледі.</p>
+      </div>
+    </div>
+  </section>
 
-    function showSlide(index) {
-      const slides = document.querySelectorAll('#carousel img');
-      if (index >= slides.length) currentIndex = 0;
-      if (index < 0) currentIndex = slides.length - 1;
+  <!-- Раздел История компании -->
+  <section class="about-section">
+    <h2>Біздің миссия</h2>
+    <div class="about-content reverse">
+      <div class="about-text">
+        <p>SaparTime сізге ыңғайлы және жайлы саяхат әлемін ашады. Ұзын кезектермен бас ауыртуыңызды ұмытып, поездға билетті бір басқаннан ақ брондаңыз. Біз сіздің саяхатыңыз тек жеңіл әрі жылдам болу үшін барлық процесті қарапайым еттік.</p>
+        <div class="mission-values">
+          <div class="value-item">
+            <div class="value-icon">💡</div>
+            <div class="value-text">Инновация</div>
+          </div>
+          <div class="value-item">
+            <div class="value-icon">🤝</div>
+            <div class="value-text">Сенімділік</div>
+          </div>
+          <div class="value-item">
+            <div class="value-icon">⚡</div>
+            <div class="value-text">Жылдамдық</div>
+          </div>
+        </div>
+      </div>
+      <div class="about-image">
+        <div class="image-container">
+          <img src="{% static 'img/3 photo.jpg' %}" alt="История компании">
+          <div class="image-overlay"></div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-      for (let i = 0; i < slides.length; i++) {
-        slides[i].style.transform = `translateX(-${currentIndex * 100}%)`;
-      }
-    }
+  <!-- Карусель изображений -->
+  <section class="carousel-section">
+    <h2>Фотогалерея</h2>
+    <div class="carousel-container">
+      <div class="carousel-wrapper">
+        <div class="carousel" id="carousel">
+          <img src="{% static 'img/4 photo.jpg' %}" alt="Картинка 1">
+          <img src="{% static 'img/3 photo.jpg' %}" alt="Карусель 2">
+          <img src="{% static 'img/обслуж.jpg' %}" alt="Карусель 3">
+          <img src="{% static 'img/1 photo.jpg' %}" alt="Картинка 4">
+          <img src="{% static 'img/2 photo.png' %}" alt="Картинка 5">
+        </div>
+      </div>
+      <div class="carousel-controls">
+        <button class="carousel-button prev" onclick="prevSlide()">&#10094;</button>
+        <div class="carousel-indicators" id="carousel-indicators"></div>
+        <button class="carousel-button next" onclick="nextSlide()">&#10095;</button>
+      </div>
+    </div>
+  </section>
 
-    function nextSlide() {
-      currentIndex++;
+  <!-- Раздел Услуги -->
+  <section class="services-section">
+    <h2>Біздің қызметтер</h2>
+    <div class="services-grid">
+      <div class="service-item">
+        <div class="service-icon">
+          <div class="icon-circle">
+            <img src="{% static 'img/билетбум.jpg' %}" alt="Железнодорожные билеты">
+          </div>
+        </div>
+        <h3>Теміржол билеттері</h3>
+        <p>Біздің веб-сайт арқылы бүкіл Қазақстан бойынша пойыз билеттерін оңай және жылдам сатып алыңыз.</p>
+      </div>
+      
+      <div class="service-item">
+        <div class="service-icon">
+          <div class="icon-circle">
+            <img src="{% static 'img/карта.jpg' %}" alt="Путеводители">
+          </div>
+        </div>
+        <h3>Жол</h3>
+        <p>Саяхат кезінде маршруттар, кестелер және тұру орындары туралы пайдалы ақпарат алыңыз.</p>
+      </div>
+      
+      <div class="service-item">
+        <div class="service-icon">
+          <div class="icon-circle">
+            <img src="{% static 'img/электронб.jpg' %}" alt="Электронные билеты">
+          </div>
+        </div>
+        <h3>Электронды билеттер</h3>
+        <p>Біздің электронды билеттеріміз жайлылық пен ыңғайлылыққа кепілдік береді. Оларды мобильді құрылғыда көрсете аласыз.</p>
+      </div>
+      
+      <div class="service-item">
+        <div class="service-icon">
+          <div class="icon-circle">
+            <img src="{% static 'img/обслуж.jpg' %}" alt="Обслуживание клиентов">
+          </div>
+        </div>
+        <h3>Клиенттерге қызмет көрсету</h3>
+        <p>Біздің мамандар билеттерді сатып алуға қатысты кез келген мәселелер бойынша көмектесуге және кеңес беруге әрқашан дайын.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="cta-section">
+    <div class="cta-content">
+      <h2 style="color: white;">Саяхатыңызды бастауға дайынсыз ба?</h2>
+      <p>Билетті бірден брондап, жолға шығыңыз</p>
+      <a href="/" class="cta-button">Билеттерді іздеу</a>
+    </div>
+    <div class="cta-wave"></div>
+  </div>
+</div>
+
+<script>
+  let currentIndex = 0;
+  const carousel = document.getElementById('carousel');
+  const slides = document.querySelectorAll('#carousel img');
+  const totalSlides = slides.length;
+  const indicatorsContainer = document.getElementById('carousel-indicators');
+
+  // Создаем индикаторы
+  for (let i = 0; i < totalSlides; i++) {
+    const indicator = document.createElement('span');
+    indicator.classList.add('carousel-indicator');
+    if (i === 0) indicator.classList.add('active');
+    indicator.addEventListener('click', () => {
+      currentIndex = i;
       showSlide(currentIndex);
-    }
+    });
+    indicatorsContainer.appendChild(indicator);
+  }
 
-    function prevSlide() {
-      currentIndex--;
-      showSlide(currentIndex);
-    }
+  function showSlide(index) {
+    if (index >= totalSlides) currentIndex = 0;
+    if (index < 0) currentIndex = totalSlides - 1;
+    
+    carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
+    
+    // Обновляем активный индикатор
+    document.querySelectorAll('.carousel-indicator').forEach((indicator, i) => {
+      indicator.classList.toggle('active', i === currentIndex);
+    });
+  }
 
+  function nextSlide() {
+    currentIndex++;
     showSlide(currentIndex);
-  </script>
+  }
 
-</body>
-</html>
+  function prevSlide() {
+    currentIndex--;
+    showSlide(currentIndex);
+  }
+
+  let slideInterval = setInterval(nextSlide, 3000);
+
+  document.querySelector('.carousel-container').addEventListener('mouseenter', () => {
+    clearInterval(slideInterval);
+  });
+
+  document.querySelector('.carousel-container').addEventListener('mouseleave', () => {
+    slideInterval = setInterval(nextSlide, 3000);
+  });
+
+  // Инициализация
+  showSlide(currentIndex);
+</script>
+{% endblock content %}
