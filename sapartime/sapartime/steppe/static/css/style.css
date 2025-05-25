@@ -38,6 +38,7 @@ header {
   height: auto;
   margin-left: 100px;
   padding: 10px 0;
+  filter: brightness(0) invert(1); /* Делает черный логотип белым */
 }
 
 .head {
