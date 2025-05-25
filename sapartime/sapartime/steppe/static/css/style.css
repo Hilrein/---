@@ -2453,3 +2453,185 @@ textarea:focus {
         padding: 25px 20px;
     }
 }
+
+/* Стили для промокодов */
+.promo-container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 15px;
+}
+
+.promo-container h1 {
+    color: #007bff;
+    margin-bottom: 20px;
+    font-size: 2.5rem;
+    text-align: center;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.promo-container h1:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background: linear-gradient(90deg, #007bff, #00c6ff);
+    border-radius: 2px;
+}
+
+.promo-container p {
+    color: #666;
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.promo-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+}
+
+.promo-item {
+    background: linear-gradient(135deg, #f8f9fa, #ffffff);
+    border: 2px solid #e9ecef;
+    border-radius: 12px;
+    padding: 25px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.promo-item:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 6px;
+    background: linear-gradient(90deg, #007bff, #00c6ff);
+    border-radius: 12px 12px 0 0;
+}
+
+.promo-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 123, 255, 0.1);
+    border-color: #d0e8ff;
+}
+
+.promo-code {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #007bff;
+    margin-bottom: 15px;
+    padding: 10px 15px;
+    background-color: #f0f7ff;
+    border-radius: 8px;
+    display: inline-block;
+    letter-spacing: 1px;
+}
+
+.promo-discount {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #28a745;
+    margin-bottom: 12px;
+}
+
+.promo-description {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.promo-expiry {
+    font-size: 0.95rem;
+    color: #dc3545;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+}
+
+.promo-expiry:before {
+    content: "⏱";
+    margin-right: 8px;
+    font-size: 1.1rem;
+}
+
+/* Адаптивность для страницы промокодов */
+@media (max-width: 768px) {
+    .promo-container {
+        padding: 15px;
+        margin: 20px 15px;
+    }
+    
+    .promo-container h1 {
+        font-size: 2rem;
+    }
+    
+    .promo-list {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 576px) {
+    .promo-container h1 {
+        font-size: 1.8rem;
+    }
+    
+    .promo-item {
+        padding: 20px;
+    }
+    
+    .promo-code {
+        font-size: 1.6rem;
+    }
+    
+    .promo-discount {
+        font-size: 1.2rem;
+    }
+}
+
+/* Стили для темной темы */
+.dark-mode .promo-container {
+    background-color: #2a2a2a;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.dark-mode .promo-container h1 {
+    color: #4da3ff;
+}
+
+.dark-mode .promo-container p {
+    color: #b0b0b0;
+}
+
+.dark-mode .promo-item {
+    background: linear-gradient(135deg, #2a2a2a, #323232);
+    border-color: #3a3a3a;
+}
+
+.dark-mode .promo-code {
+    background-color: #1a2133;
+    color: #4da3ff;
+}
+
+.dark-mode .promo-discount {
+    color: #5cb85c;
+}
+
+.dark-mode .promo-description {
+    color: #cccccc;
+}
+
+.dark-mode .promo-expiry {
+    color: #ff6b6b;
+}
